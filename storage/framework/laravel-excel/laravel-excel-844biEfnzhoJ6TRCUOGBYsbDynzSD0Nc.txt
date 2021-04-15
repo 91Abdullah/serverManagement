@@ -1,0 +1,6 @@
+,Id,Zone,Customer Name,Solution Distro,Hardware,Service Contract,Comment,Isdallowed,Ip,Winbox,Secondaryip,Failoverip,Mobile Number,Queue Stats,Customreport,Qpanel,Sshport,Http Port,Webminport
+,2,Baldia,Muhammad Umair,Nothing,Data,Yes,Okay,Yes,123,1,213,123,546345,Yes,Yes,Yes,213,231,13
+,3,,admin@admin.com,,,No,,No,,,,,,No,No,No,,,
+,4,Karahci,,,,Yes,,No,,,,,,No,No,No,,,
+,6,asd,admin@admin.com,,,Yes,,Yes,,,,,,Yes,Yes,Yes,,,
+,7,4235,asd,,,Yes,,Yes,,,,,,Yes,Yes,Yes,,,
