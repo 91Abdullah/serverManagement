@@ -8,7 +8,7 @@
           </a> --}}
         </li>
         <li>
-          @can('view-documentation')
+          @can('documentation-view')
           <a href="{{route('docs.index')}}" target="_blank">
             {{__("Documentation")}}
           </a>

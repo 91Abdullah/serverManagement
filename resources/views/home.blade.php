@@ -10,7 +10,7 @@
         <div style="padding:30px 0; text-align: center; color:white;">
             <h2>Welcome To Telecard</h2>
             <h4>Servers Management Console</h4>
-            @can('view-documentation')
+            @can('documentation-view')
                 <a href="{{ route('docs.index') }}" class="btn btn-primary" type="button" aria-expanded="false"><i
                         class="now-ui-icons files_paper"></i>
                     Documentation</a>
