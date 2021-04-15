@@ -17,7 +17,7 @@ class CreateDepartmentTable extends Migration {
 		{
 			$table->bigInteger('id', true)->unsigned();
 			$table->string('name');
-			$table->timestamps(10);
+			$table->timestamps(6);
 			$table->softDeletes();
 		});
 	}

@@ -18,7 +18,7 @@ class CreateRolesTable extends Migration {
 			$table->bigInteger('id', true)->unsigned();
 			$table->string('name');
 			$table->string('guard_name');
-			$table->timestamps(10);
+			$table->timestamps(6);
 			$table->unique(['name','guard_name']);
 		});
 	}
