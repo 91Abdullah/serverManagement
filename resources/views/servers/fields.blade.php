@@ -19,7 +19,7 @@
         <i class="now-ui-icons objects_key-25"></i>
         </a>
         {{-- {!! Form::text('Server_Password', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255, 'readonly']) !!} --}}
-        <input type="text" name="Server_Password" class="form-control" readonly value=""/>
+        <input type="text" name="Server_Password" class="form-control" value=""/>
         <a class="btn">
             <i class="now-ui-icons files_single-copy-04"></i>
         </a>
@@ -104,7 +104,7 @@
 
 <!-- Customer Report Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('Customer_Report', 'Customer Report:') !!}
+    {!! Form::label('Customer_Report', 'Custom Report:') !!}
     {!! Form::select('Customreport', ['1' => 'Yes', '0' => 'No'], '1', ['class' => 'form-control']) !!}
 </div>
 

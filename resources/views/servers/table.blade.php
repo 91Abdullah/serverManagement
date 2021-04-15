@@ -55,7 +55,7 @@
                                         <th>Winbox</th>
                                         <th>Secondary IP</th>
                                         <th>Queue Stats</th>
-                                        <th>Customer Report</th>
+                                        <th>Custom Report</th>
                                         <th>Q Panel</th>
                                         <th>SSH Port</th>
                                         <th>HTP Port</th>
