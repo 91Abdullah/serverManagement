@@ -89,13 +89,13 @@
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                             <a class="dropdown-item" target="_blank"
-                                                                href="https://{{ $server->IP . ':' . $server->SSHPort }}">SSH
+                                                                href="https://{{ $server->IP.":".$server->SSH_PORT }}">SSH
                                                                 PORT</a>
                                                             <a class="dropdown-item" target="_blank"
-                                                                href="https://{{ $server->IP . ':' . $server->HTTP_Port }}">HTTP
+                                                                href="https://{{ $server->IP . ':' . $server->HTTP_PORT }}">HTTP
                                                                 PORT</a>
                                                             <a class="dropdown-item" target="_blank"
-                                                                href="https://{{ $server->IP . ':' . $server->WebminPort }}">Webmin
+                                                                href="https://{{ $server->IP . ':' . $server->Webmin_PORT }}">Webmin
                                                                 PORT</a>
                                                         </div>
                                                     </div>
