@@ -22,7 +22,7 @@ class CreateThemesTable extends Migration {
 			$table->boolean('status')->default(1);
 			$table->string('taggable_type', 191);
 			$table->bigInteger('taggable_id')->unsigned();
-			$table->timestamps(10);
+			$table->timestamps(6);
 			$table->softDeletes();
 		});
 	}

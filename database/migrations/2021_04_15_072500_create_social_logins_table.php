@@ -19,7 +19,7 @@ class CreateSocialLoginsTable extends Migration {
 			$table->bigInteger('user_id')->unsigned();
 			$table->string('provider', 100);
 			$table->text('social_id');
-			$table->timestamps(10);
+			$table->timestamps(6);
 		});
 	}
 

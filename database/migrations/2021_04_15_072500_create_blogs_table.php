@@ -18,7 +18,7 @@ class CreateBlogsTable extends Migration {
 			$table->bigInteger('id', true)->unsigned();
 			$table->string('title');
 			$table->text('content');
-			$table->timestamps(10);
+			$table->timestamps(6);
 			$table->softDeletes();
 		});
 	}

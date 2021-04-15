@@ -19,7 +19,7 @@ class CreatePermissionsTable extends Migration {
 			$table->string('name');
 			$table->string('nick_name', 100)->nullable();
 			$table->string('guard_name')->default('web');
-			$table->timestamps(10);
+			$table->timestamps(6);
 			$table->softDeletes();
 			$table->unique(['name','guard_name']);
 		});

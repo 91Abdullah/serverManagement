@@ -17,7 +17,7 @@ class CreateSolutionTypeTable extends Migration {
 		{
 			$table->bigInteger('id', true)->unsigned();
 			$table->string('name')->nullable()->default('NULL');
-			$table->timestamps(10);
+			$table->timestamps(6);
 			$table->softDeletes();
 		});
 	}

@@ -18,7 +18,7 @@ class CreateLaravelBlockerTypesTable extends Migration {
 			$table->integer('id')->unsigned()->primary();
 			$table->string('slug', 191)->unique();
 			$table->string('name', 191);
-			$table->timestamps(10);
+			$table->timestamps(6);
 			$table->softDeletes();
 		});
 	}

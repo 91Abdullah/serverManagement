@@ -19,7 +19,7 @@ class CreateActivationsTable extends Migration {
 			$table->bigInteger('user_id')->unsigned()->index();
 			$table->string('token', 191);
 			$table->string('ip_address', 45);
-			$table->timestamps(10);
+			$table->timestamps(6);
 		});
 	}
 

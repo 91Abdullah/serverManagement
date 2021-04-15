@@ -24,7 +24,7 @@ class CreateProfilesTable extends Migration {
 			$table->string('github_username', 191)->nullable();
 			$table->string('avatar', 191)->nullable();
 			$table->boolean('avatar_status')->default(0);
-			$table->timestamps(10);
+			$table->timestamps(6);
 		});
 	}
 

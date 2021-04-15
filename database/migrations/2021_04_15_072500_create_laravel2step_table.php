@@ -22,7 +22,7 @@ class CreateLaravel2stepTable extends Migration {
 			$table->boolean('authStatus')->default(0);
 			$table->dateTime('authDate')->nullable();
 			$table->dateTime('requestDate')->nullable();
-			$table->timestamps(10);
+			$table->timestamps(6);
 		});
 	}
 

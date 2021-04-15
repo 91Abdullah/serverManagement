@@ -20,7 +20,7 @@ class CreateLaravelBlockerTable extends Migration {
 			$table->string('value', 191)->unique();
 			$table->text('note')->nullable();
 			$table->bigInteger('userId')->unsigned()->nullable()->index('laravel_blocker_userid_index');
-			$table->timestamps(10);
+			$table->timestamps(6);
 			$table->softDeletes();
 		});
 	}
