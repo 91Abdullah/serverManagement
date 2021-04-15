@@ -16,7 +16,17 @@
     <a type="button" class="button" value="Generate" onClick="randomPassword(20);" tabindex="2">
         <i class="now-ui-icons objects_key-25"></i>
     </a>
-    {!! Form::text('Server_Password', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255]) !!}
+    {!! Form::text('Server_Password', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255, 'name' => 'Server_Password']) !!}
+</div>
+
+
+
+<div class="form-group col-sm-6">
+    {!! Form::label('GUI_Password', 'GUI Password:') !!}
+    <a type="button" class="button" value="Generate2" onClick="randomPassword2(20);" tabindex="2">
+        <i class="now-ui-icons objects_key-25"></i>
+    </a>
+    {!! Form::text('GUI_Password', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255, 'name'=>'GUI_Password']) !!}
 </div>
 <div class="form-group col-sm-6">
     {!! Form::label('IP', 'Server Primary IP:') !!}
@@ -110,6 +120,10 @@
     {!! Form::label('HTTP_PORT', 'HTTP Port:') !!}
     {!! Form::text('HTTP_PORT', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255]) !!}
 </div>
+<div class="form-group col-sm-6">
+    {!! Form::label('HTTPS_PORT', 'HTTP Port:') !!}
+    {!! Form::text('HTTPS_PORT', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255]) !!}
+</div>
 
 <!-- Webmin Port Field -->
 <div class="form-group col-sm-6">
@@ -133,6 +147,23 @@ function randomPassword(length) {
     }
     Server_Password=document.getElementsByName('Server_Password');
     Server_Password[0].value = pass;
+}
+function randomPassword2(length) {
+    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+    var pass = "";
+    for (var x = 0; x < length; x++) {
+        var i = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(i);
+    }
+    GUI_Password=document.getElementsByName('GUI_Password');
+    GUI_Password[0].value = pass;
+}
+</script>
+<script>
+function FillBilling(f) {
+  if(f.billingtoo.checked == true) {
+    f.Server_Password.value = f.GUI_Password.value;
+  }
 }
 </script>
 @endpush

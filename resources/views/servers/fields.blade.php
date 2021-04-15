@@ -13,17 +13,34 @@
 
 <!-- Server Password Field -->
 <div class="form-group col-sm-6">
-    
-        {!! Form::label('Server_Password', 'Server Password:') !!}
-        <a type="button" class="button" value="Generate" onClick="randomPassword(20);" tabindex="2">
+
+    {!! Form::label('CLI_Password', 'Server Password:') !!}
+    <a type="button" class="button" value="Generate" onClick="randomPassword(20);" tabindex="2">
         <i class="now-ui-icons objects_key-25"></i>
-        </a>
-        {{-- {!! Form::text('Server_Password', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255, 'readonly']) !!} --}}
-        <input type="text" name="Server_Password" class="form-control" value=""/>
-        <a class="btn">
+    </a>
+    {{-- {!! Form::text('Server_Password', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255, 'readonly']) !!} --}}
+    <input type="text" name="Server_Password" class="form-control" value="" />
+    {{-- <a class="btn">
             <i class="now-ui-icons files_single-copy-04"></i>
-        </a>
-    
+        </a> --}}
+
+</div>
+<div class="form-group col-sm-6">
+    <input type="checkbox" name="billingtoo" onclick="FillBilling(this.form)">
+    <em>Same as above</em>
+</div>
+<div class="form-group col-sm-6">
+
+    {!! Form::label('GUI_Password', 'GLI Password:') !!}
+    <a type="button" class="button" value="Generate2" onClick="randomPassword2(20);" tabindex="2">
+        <i class="now-ui-icons objects_key-25"></i>
+    </a>
+    {{-- {!! Form::text('Server_Password', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255, 'readonly']) !!} --}}
+    <input type="text" name="GUI_Password" class="form-control" value="" />
+    {{-- <a class="btn">
+        <i class="now-ui-icons files_single-copy-04"></i>
+    </a> --}}
+
 </div>
 <div class="form-group col-sm-6">
     {!! Form::label('IP', 'Server Primary IP:') !!}
@@ -125,6 +142,10 @@
     {!! Form::label('HTTP_PORT', 'HTTP Port:') !!}
     {!! Form::text('HTTP_PORT', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255]) !!}
 </div>
+<div class="form-group col-sm-6">
+    {!! Form::label('HTTPS_PORT', 'HTTPS Port:') !!}
+    {!! Form::text('HTTPS_PORT', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255]) !!}
+</div>
 
 <!-- Webmin Port Field -->
 <div class="form-group col-sm-6">
@@ -138,16 +159,41 @@
     <a href="{{ route('servers.index') }}" class="btn btn-secondary">Cancel</a>
 </div>
 @push('js')
-<script>
-function randomPassword(length) {
-    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
-    var pass = "";
-    for (var x = 0; x < length; x++) {
-        var i = Math.floor(Math.random() * chars.length);
-        pass += chars.charAt(i);
-    }
-    Server_Password=document.getElementsByName('Server_Password');
-    Server_Password[0].value = pass;
-}
-</script>
+    <script>
+        function randomPassword(length) {
+            var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+            var pass = "";
+            for (var x = 0; x < length; x++) {
+                var i = Math.floor(Math.random() * chars.length);
+                pass += chars.charAt(i);
+            }
+            Server_Password = document.getElementsByName('Server_Password');
+            Server_Password[0].value = pass;
+        }
+
+        function randomPassword2(length) {
+            var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+            var pass = "";
+            for (var x = 0; x < length; x++) {
+                var i = Math.floor(Math.random() * chars.length);
+                pass += chars.charAt(i);
+            }
+            GUI_Password = document.getElementsByName('GUI_Password');
+            GUI_Password[0].value = pass;
+        }
+
+    </script>
+    <script>
+        function FillBilling(f) {
+            if (f.billingtoo.checked == true) {
+                f.GUI_Password.value = f.Server_Password.value;
+                f.GUI_Password.readOnly = true;
+            }
+            else{
+                f.GUI_Password.readOnly = false;
+                f.GUI_Password.value = "";
+            }
+        }
+
+    </script>
 @endpush

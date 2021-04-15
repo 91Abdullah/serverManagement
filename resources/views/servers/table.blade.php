@@ -58,7 +58,8 @@
                                         <th>Custom Report</th>
                                         <th>Q Panel</th>
                                         <th>SSH Port</th>
-                                        <th>HTP Port</th>
+                                        <th>HTTP Port</th>
+                                        <th>HTTPS Port</th>
                                         <th>Webmin Port</th>
                                         <th class="disabled-sorting text-right" colspan="3">Action</th>
                                     </tr>
@@ -95,6 +96,9 @@
                                                                 href="https://{{ $server->IP . ':' . $server->HTTP_PORT }}">HTTP
                                                                 PORT</a>
                                                             <a class="dropdown-item" target="_blank"
+                                                                href="https://{{ $server->IP . ':' . $server->HTTPS_PORT }}">HTTPS
+                                                                PORT</a>
+                                                            <a class="dropdown-item" target="_blank"
                                                                 href="https://{{ $server->IP . ':' . $server->Webmin_PORT }}">Webmin
                                                                 PORT</a>
                                                         </div>
@@ -128,6 +132,7 @@
                                                 @endif
                                                 <td>{{ $server->SSH_PORT }}</td>
                                                 <td>{{ $server->HTTP_PORT }}</td>
+                                                <td>{{ $server->HTTPS_PORT }}</td>
                                                 <td>{{ $server->Webmin_PORT }}</td>
                                                 <td>
                                                     {!! Form::open(['route' => ['servers.destroy', $server->id], 'method' => 'delete']) !!}

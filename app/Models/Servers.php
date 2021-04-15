@@ -70,7 +70,9 @@ class Servers extends Model
         'Webmin_PORT',
         'IP',
         'Solution_Distro',
-        'department_id'
+        'department_id',
+        'GUI_Password',
+        'HTTPS_PORT'
     ];
 
     /**
@@ -100,7 +102,9 @@ class Servers extends Model
         'Webmin_PORT' => 'string',
         'IP' => 'string',
         'Solution_Distro' => 'string',
-        'department_id' => 'integer'
+        'department_id' => 'integer',
+        'GUI_Password' => 'string',
+        'HTTPS_PORT'  => 'string'
     ];
 
     /**
@@ -132,7 +136,9 @@ class Servers extends Model
         'deleted_at' => 'nullable',
         'IP' => 'nullable|string|max:255',
         'Solution_Distro' => 'nullable|string|max:255',
-        'department_id' => 'required'
+        'department_id' => 'required',
+        'GUI_Password' => 'nullable|string|max:255',
+        'HTTPS_PORT'  =>'nullable|string|max:255'
     ];
 
 
