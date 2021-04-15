@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRolesTable extends Migration {
+class CreateSolutionTypeTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,13 +13,12 @@ class CreateRolesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('roles', function(Blueprint $table)
+		Schema::create('solution_type', function(Blueprint $table)
 		{
 			$table->bigInteger('id', true)->unsigned();
-			$table->string('name');
-			$table->string('guard_name');
-			$table->timestamps(6);
-			$table->unique(['name','guard_name']);
+			$table->string('name')->nullable()->default('NULL');
+			$table->timestamps(10);
+			$table->softDeletes();
 		});
 	}
 
@@ -31,7 +30,7 @@ class CreateRolesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('roles');
+		Schema::drop('solution_type');
 	}
 
 }

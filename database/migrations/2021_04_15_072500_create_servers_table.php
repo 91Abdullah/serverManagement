@@ -34,7 +34,7 @@ class CreateServersTable extends Migration {
 			$table->string('SSH_PORT')->nullable();
 			$table->string('HTTP_PORT')->nullable();
 			$table->string('Webmin_PORT')->nullable();
-			$table->timestamps(6);
+			$table->timestamps(10);
 			$table->softDeletes();
 			$table->string('IP')->nullable();
 			$table->string('Solution_Distro')->nullable();

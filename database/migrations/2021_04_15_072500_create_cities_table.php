@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDepartmentTable extends Migration {
+class CreateCitiesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,11 +13,11 @@ class CreateDepartmentTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('department', function(Blueprint $table)
+		Schema::create('cities', function(Blueprint $table)
 		{
 			$table->bigInteger('id', true)->unsigned();
-			$table->string('name');
-			$table->timestamps(6);
+			$table->string('name')->nullable()->default('NULL');
+			$table->timestamps(10);
 			$table->softDeletes();
 		});
 	}
@@ -30,7 +30,7 @@ class CreateDepartmentTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('department');
+		Schema::drop('cities');
 	}
 
 }

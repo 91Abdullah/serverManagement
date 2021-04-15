@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration {
+class CreateSolutionLocationTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,15 +13,11 @@ class CreateUsersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('users', function(Blueprint $table)
+		Schema::create('solution_location', function(Blueprint $table)
 		{
 			$table->bigInteger('id', true)->unsigned();
-			$table->string('name', 191)->unique();
-			$table->string('email', 191)->nullable()->unique();
-			$table->dateTime('email_verified_at')->nullable();
-			$table->string('password', 191);
-			$table->string('remember_token', 100)->nullable();
-			$table->timestamps(6);
+			$table->string('name')->nullable()->default('NULL');
+			$table->timestamps(10);
 			$table->softDeletes();
 		});
 	}
@@ -34,7 +30,7 @@ class CreateUsersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('users');
+		Schema::drop('solution_location');
 	}
 
 }
