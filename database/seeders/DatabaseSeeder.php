@@ -25,27 +25,18 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
         $this->call(BlogsTableSeeder::class);
-        $this->call(ActivationsTableSeeder::class);
         $this->call(CitiesTableSeeder::class);
         $this->call(DepartmentTableSeeder::class);
         $this->call(EmailLogTableSeeder::class);
-        $this->call(FailedJobsTableSeeder::class);
-        $this->call(Laravel2stepTableSeeder::class);
-        $this->call(LaravelBlockerTableSeeder::class);
-        $this->call(ThemesTableSeeder::class);
         $this->call(SolutionTypeTableSeeder::class);
         $this->call(SolutionLocationTableSeeder::class);
-        $this->call(SocialLoginsTableSeeder::class);
         $this->call(ServersTableSeeder::class);
         $this->call(RoleHasPermissionsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
-        $this->call(ProjectsTableSeeder::class);
         $this->call(ProfilesTableSeeder::class);
         $this->call(PasswordResetsTableSeeder::class);
         $this->call(ModelHasRolesTableSeeder::class);
         $this->call(ModelHasPermissionsTableSeeder::class);
         $this->call(MigrationsTableSeeder::class);
-        $this->call(LaravelLoggerActivityTableSeeder::class);
-        $this->call(LaravelBlockerTypesTableSeeder::class);
     }
 }
