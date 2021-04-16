@@ -19,7 +19,10 @@
     {!! Form::text('Server_Password', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255, 'name' => 'Server_Password']) !!}
 </div>
 
-
+<div class="form-group col-sm-6">
+    <input type="checkbox" name="billingtoo" onclick="FillBilling(this.form)">
+    <em>Same as above</em>
+</div>
 
 <div class="form-group col-sm-6">
     {!! Form::label('GUI_Password', 'GUI Password:') !!}
