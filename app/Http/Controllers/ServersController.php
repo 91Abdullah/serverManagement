@@ -21,6 +21,8 @@ use App\Models\City;
 use App\Models\Department;
 use App\Models\SolutionLocation;
 use App\Models\SolutionType;
+use Illuminate\Support\Facades\Input;
+
 
 class ServersController extends AppBaseController
 {

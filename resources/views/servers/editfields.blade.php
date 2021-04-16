@@ -61,7 +61,7 @@
 <!-- Service Contract Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('Service_Contract', 'Service Contract:') !!}
-    {!! Form::select('Service_Contract', ['1' => 'Yes', '0' => 'No'], null, ['class' => 'form-control']) !!}
+    {!! Form::select('Service_Contract', array('0' => 'Select Option', '1' => 'Yes', '2' => 'No'), null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Comment Field -->
@@ -73,7 +73,7 @@
 <!-- Isd Allowed Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('ISD_Allowed', 'ISD Allowed:') !!}
-    {!! Form::select('ISDAllowed', ['1' => 'Yes', '0' => 'No'], '1', ['class' => 'form-control']) !!}
+    {!! Form::select('ISD_Allowed', array('0' => 'Select Option', '1' => 'Yes', '2' => 'No'), null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Failover Ip Field -->
@@ -97,19 +97,19 @@
 <!-- Queue Stats Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('Queue_Stats', 'Queue Stats:') !!}
-    {!! Form::select('Queue_stats', ['1' => 'Yes', '0' => 'No'], null, ['class' => 'form-control']) !!}
+    {!! Form::select('Queue_stats', array('0' => 'Select Option', '1' => 'Yes', '2' => 'No'), null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Customer Report Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('Customer_Report', 'Custom Report:') !!}
-    {!! Form::select('Customreport', ['1' => 'Yes', '0' => 'No'], '1', ['class' => 'form-control']) !!}
+    {!! Form::label('Customer_Report', 'Customer Report:') !!}
+    {!! Form::select('Customer_Report',array('0' => 'Select Option', '1' => 'Yes', '2' => 'No'), null , ['class' => 'form-control']) !!}
 </div>
 
 <!-- Q Panel Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('Q_Panel', 'Q Panel:') !!}
-    {!! Form::select('Qpanel', ['1' => 'Yes', '0' => 'No'], '1', ['class' => 'form-control']) !!}
+    {!! Form::select('Q_Panel', array('0' => 'Select Option', '1' => 'Yes', '2' => 'No'), null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Ssh Port Field -->
