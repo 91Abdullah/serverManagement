@@ -37,6 +37,7 @@
                             <table class="table table-striped" id="servers-table" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Actions</th>
                                         <th>S.no</th>
                                         <th>City</th>
                                         <th>Customer Name</th>
@@ -61,13 +62,38 @@
                                         <th>HTTP Port</th>
                                         <th>HTTPS Port</th>
                                         <th>Webmin Port</th>
-                                        <th class="disabled-sorting text-right" colspan="3">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if ($servers->isNotEmpty())
                                         @foreach ($servers as $server)
                                             <tr>
+                                                <td>
+                                                    {!! Form::open(['route' => ['servers.destroy', $server->id], 'method' => 'delete']) !!}
+                                                    <div class=''>
+                                                        <a href="{{ route('servers.show', [$server->id]) }}"
+                                                            class=''><i class="fa fa-eye"></i></a>
+                                                        @can('server-edit')
+                                                            <a href="{{ route('servers.edit', [$server->id]) }}"
+                                                                class=''><i class="fa fa-edit"></i></a>
+                                                        @endcan
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        @can('server-delete')
+                                                            {{-- {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => '', 'onclick' => "return confirm('Are you sure?')"]) !!} --}}
+                                                            {{-- <a href="" onclick="return confirm('Are you sure?')" type="submit"></a> --}}
+                                                            <input style="display:none;"
+                                                                onclick="return confirm('Are you sure?')" type="submit"
+                                                                id="submit" />
+
+                                                            <span onclick="$('#submit').trigger('click')" type="submit"
+                                                                class="" style="cursor:pointer; color:#3294f9">
+                                                                <i class="fas fa-trash"></i>
+                                                            </span>
+                                                        @endcan
+                                                    </div>
+                                                    {!! Form::close() !!}
+                                                </td>
                                                 <td>{{ $number++ }}</td>
                                                 <td>{{ $server->city->name }}</td>
                                                 <td>{{ $server->Customer_Name }}</td>
@@ -90,7 +116,7 @@
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                             <a class="dropdown-item" target="_blank"
-                                                                href="https://{{ $server->IP.":".$server->SSH_PORT }}">SSH
+                                                                href="https://{{ $server->IP . ':' . $server->SSH_PORT }}">SSH
                                                                 PORT</a>
                                                             <a class="dropdown-item" target="_blank"
                                                                 href="http://{{ $server->IP . ':' . $server->HTTP_PORT }}">HTTP
@@ -105,52 +131,44 @@
                                                     </div>
                                                 </td>
                                                 <td>{{ $server->Solution_Distro }}</td>
-                                                <td>{{ $server->Service_Contract }}</td>
+                                                @if ($server->Service_Contract == 'Yes')
+                                                    <td><i class="fas fa-check-circle" style="color:green;"></i></td>
+                                                @else
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>                                                
+                                                @endif
                                                 <td>{{ $server->Comment }}</td>
-                                                <td>{{ $server->ISD_Allowed }}</td>
+                                                @if ($server->ISD_Allowed == 'Yes')
+                                                    <td><i class="fas fa-check-circle" style="color:green;"></i></td>
+                                                @else
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>                                                
+                                                @endif
                                                 <td>{{ $server->Failover_IP }}</td>
                                                 <td>{{ $server->Winbox }}</td>
                                                 <td>{{ $server->Secondary_IP }}</td>
                                                 @if ($server->Queue_Stats == 'Yes')
                                                     <td><a href="https://{{ $server->IP }}/queue-stats"
-                                                            target="_blank">Yes</a></td>
+                                                            target="_blank"><i class="fas fa-check-circle" style="color:green;"></i>Go</a></td>
                                                 @else
-                                                    <td>No</td>
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
                                                 @endif
                                                 @if ($server->Customer_Report == 'Yes')
                                                     <td><a href="https://{{ $server->IP }}/custom_report"
-                                                            target="_blank">Yes</a></td>
+                                                            target="_blank"><i class="fas fa-check-circle" style="color:green;"></i>Go</a></td>
                                                 @else
-                                                    <td>No</td>
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
                                                 @endif
 
                                                 @if ($server->Q_Panel == 'Yes')
                                                     <td><a href="https://{{ $server->IP }}/qpanel"
-                                                            target="_blank">Yes</a></td>
+                                                            target="_blank"><i class="fas fa-check-circle" style="color:green;"></i>Go</a></td>
                                                 @else
-                                                    <td>No</td>
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
                                                 @endif
                                                 <td>{{ $server->SSH_PORT }}</td>
                                                 <td>{{ $server->HTTP_PORT }}</td>
                                                 <td>{{ $server->HTTPS_PORT }}</td>
                                                 <td>{{ $server->Webmin_PORT }}</td>
-                                                <td>
-                                                    {!! Form::open(['route' => ['servers.destroy', $server->id], 'method' => 'delete']) !!}
-                                                    <div class='btn-group'>
-                                                        <a href="{{ route('servers.show', [$server->id]) }}"
-                                                            class='btn btn-ghost-success'><i class="fa fa-eye"></i></a>
-                                                        @can('server-edit')
-                                                            <a href="{{ route('servers.edit', [$server->id]) }}"
-                                                                class='btn btn-ghost-info'><i class="fa fa-edit"></i></a>
-                                                        @endcan
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        @can('server-delete')
-                                                            {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-ghost-danger', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                                                        @endcan
-                                                    </div>
-                                                    {!! Form::close() !!}
-                                                </td>
+
                                             </tr>
                                         @endforeach
                                     @else

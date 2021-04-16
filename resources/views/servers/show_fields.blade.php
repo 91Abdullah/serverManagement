@@ -1,7 +1,7 @@
 <!-- City Id Field -->
 <div class="form-group">
     {!! Form::label('city_id', 'City Id:') !!}
-    <p>{{ $servers->city_id }}</p>
+    <p>{{ $servers->city->name }}</p>
 </div>
 
 <!-- Customer Name Field -->
@@ -15,22 +15,26 @@
     {!! Form::label('Server_Password', 'Server Password:') !!}
     <p>{{ $servers->Server_Password }}</p>
 </div>
+<div class="form-group">
+    {!! Form::label('GUI_Password', 'GUI Password:') !!}
+    <p>{{ $servers->GUI_Password }}</p>
+</div>
 
 <!-- Solution Location Id Field -->
 <div class="form-group">
     {!! Form::label('solution_location_id', 'Solution Location Id:') !!}
-    <p>{{ $servers->solution_location_id }}</p>
+    <p>{{ $servers->solutionLocation->name }}</p>
 </div>
 
 <!-- Solution Type Id Field -->
 <div class="form-group">
     {!! Form::label('solution_type_id', 'Solution Type Id:') !!}
-    <p>{{ $servers->solution_type_id }}</p>
+    <p>{{ $servers->solutionType->name }}</p>
 </div>
 
 <div class="form-group">
     {!! Form::label('department_id', 'Department Type Id:') !!}
-    <p>{{ $servers->department_id }}</p>
+    <p>{{ $servers->department->name }}</p>
 </div>
 
 <!-- Hardware Field -->
@@ -83,7 +87,7 @@
 
 <!-- Customer Report Field -->
 <div class="form-group">
-    {!! Form::label('Customer_Report', 'Customer Report:') !!}
+    {!! Form::label('Customer_Report', 'Custom Report:') !!}
     <p>{{ $servers->Customer_Report }}</p>
 </div>
 
@@ -103,6 +107,10 @@
 <div class="form-group">
     {!! Form::label('HTTP_PORT', 'Http Port:') !!}
     <p>{{ $servers->HTTP_PORT }}</p>
+</div>
+<div class="form-group">
+    {!! Form::label('HTTPS_PORT', 'HTTPS Port:') !!}
+    <p>{{ $servers->HTTPS_PORT }}</p>
 </div>
 
 <!-- Webmin Port Field -->

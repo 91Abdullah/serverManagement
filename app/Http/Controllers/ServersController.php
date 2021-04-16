@@ -39,6 +39,7 @@ class ServersController extends AppBaseController
             SolutionType::pluck('name', 'id'),
             Department::pluck('name', 'id')
         ];
+        
         $this->middleware('permission:server-list|server-create|server-edit|server-delete', ['only' => ['index','show']]);
         $this->middleware('permission:server-create', ['only' => ['create','store']]);
         $this->middleware('permission:server-edit', ['only' => ['edit','update']]);
@@ -64,7 +65,7 @@ class ServersController extends AppBaseController
         // $user = Auth::user();
         // $is_admin = $user->RoleUser[0]->role->name == "Admin";
 
-        $servers = Servers::paginate(5);
+        $servers = Servers::paginate(10);
 
         // return view('servers.index')->with('servers', $servers);
         return view('servers.index', compact('servers', 'number', 'somedropdowns'));
@@ -137,6 +138,7 @@ class ServersController extends AppBaseController
         // $user2 = Auth::user();
         // $is_admin = $user2->RoleUser[0]->role->name == "Admin";
 
+        // dd($server);
         if (empty($server)) {
             Flash::error('Servers not found');
 
