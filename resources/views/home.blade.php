@@ -67,7 +67,10 @@
                                                                             href="https://{{ $server->IP . ':' . $server->SSHPort }}">SSH
                                                                             PORT</a>
                                                                         <a class="dropdown-item" target="_blank"
-                                                                            href="https://{{ $server->IP . ':' . $server->HTTP_Port }}">HTTPS
+                                                                            href="http://{{ $server->IP . ':' . $server->HTTP_Port }}">HTTP
+                                                                            PORT</a>
+                                                                        <a class="dropdown-item" target="_blank"
+                                                                            href="https://{{ $server->IP . ':' . $server->HTTPS_Port }}">HTTPS
                                                                             PORT</a>
                                                                         <a class="dropdown-item" target="_blank"
                                                                             href="https://{{ $server->IP . ':' . $server->WebminPort }}">Webmin

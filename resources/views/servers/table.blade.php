@@ -93,7 +93,7 @@
                                                                 href="https://{{ $server->IP.":".$server->SSH_PORT }}">SSH
                                                                 PORT</a>
                                                             <a class="dropdown-item" target="_blank"
-                                                                href="https://{{ $server->IP . ':' . $server->HTTP_PORT }}">HTTP
+                                                                href="http://{{ $server->IP . ':' . $server->HTTP_PORT }}">HTTP
                                                                 PORT</a>
                                                             <a class="dropdown-item" target="_blank"
                                                                 href="https://{{ $server->IP . ':' . $server->HTTPS_PORT }}">HTTPS
