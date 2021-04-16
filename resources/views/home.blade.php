@@ -64,16 +64,16 @@
                                                                     <div class="dropdown-menu"
                                                                         aria-labelledby="dropdownMenuButton">
                                                                         <a class="dropdown-item" target="_blank"
-                                                                            href="https://{{ $server->IP . ':' . $server->SSHPort }}">SSH
+                                                                            href="https://{{ $server->IP . ':' . $server->SSH_PORT }}">SSH
                                                                             PORT</a>
                                                                         <a class="dropdown-item" target="_blank"
-                                                                            href="http://{{ $server->IP . ':' . $server->HTTP_Port }}">HTTP
+                                                                            href="http://{{ $server->IP . ':' . $server->HTTP_PORT }}">HTTP
                                                                             PORT</a>
                                                                         <a class="dropdown-item" target="_blank"
-                                                                            href="https://{{ $server->IP . ':' . $server->HTTPS_Port }}">HTTPS
+                                                                            href="https://{{ $server->IP . ':' . $server->HTTPS_PORT }}">HTTPS
                                                                             PORT</a>
                                                                         <a class="dropdown-item" target="_blank"
-                                                                            href="https://{{ $server->IP . ':' . $server->WebminPort }}">Webmin
+                                                                            href="https://{{ $server->IP . ':' . $server->Webmin_PORT }}">Webmin
                                                                             PORT</a>
                                                                     </div>
                                                                 </div>

@@ -102,7 +102,7 @@
 
 <!-- Customer Report Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('Customer_Report', 'Customer Report:') !!}
+    {!! Form::label('Customer_Report', 'Custom Report:') !!}
     {!! Form::select('Customer_Report',array('0' => 'Select Option', '1' => 'Yes', '2' => 'No'), null , ['class' => 'form-control']) !!}
 </div>
 
@@ -124,7 +124,7 @@
     {!! Form::text('HTTP_PORT', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255]) !!}
 </div>
 <div class="form-group col-sm-6">
-    {!! Form::label('HTTPS_PORT', 'HTTP Port:') !!}
+    {!! Form::label('HTTPS_PORT', 'HTTPS Port:') !!}
     {!! Form::text('HTTPS_PORT', null, ['class' => 'form-control', 'maxlength' => 255, 'maxlength' => 255]) !!}
 </div>
 
