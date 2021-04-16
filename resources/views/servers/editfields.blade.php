@@ -39,17 +39,17 @@
 <!-- Solution Location Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('solution_location_id', 'Solution Location:') !!}
-    {!! Form::number('solution_location_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('solution_location_id', $somedropdowns[1], '', ['class' => 'form-control']) !!}
 </div>
 
 <!-- Solution Type Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('solution_type_id', 'Solution Type:') !!}
-    {!! Form::number('solution_type_id', null, ['class' => 'form-control']) !!}
+    {!! Form::select('solution_type_id', $somedropdowns[2], '', ['class' => 'form-control']) !!}
 </div>
 <div class="form-group col-sm-6">
-    {!! Form::label('department_id', 'Department :') !!}
-    {!! Form::number('department_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('department_id', 'Department:') !!}
+    {!! Form::select('department_id', $somedropdowns[3], '', ['class' => 'form-control']) !!}
 </div>
 
 <!-- Hardware Field -->
@@ -60,8 +60,8 @@
 
 <!-- Service Contract Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('Service Contract', 'Service Contract:') !!}
-    {!! Form::text('Service Contract', null, ['class' => 'form-control']) !!}
+    {!! Form::label('Service_Contract', 'Service Contract:') !!}
+    {!! Form::select('Service_Contract', ['1' => 'Yes', '0' => 'No'], null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Comment Field -->
@@ -73,7 +73,7 @@
 <!-- Isd Allowed Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('ISD_Allowed', 'ISD Allowed:') !!}
-    {!! Form::text('ISD_Allowed', null, ['class' => 'form-control']) !!}
+    {!! Form::select('ISDAllowed', ['1' => 'Yes', '0' => 'No'], '1', ['class' => 'form-control']) !!}
 </div>
 
 <!-- Failover Ip Field -->
@@ -97,19 +97,19 @@
 <!-- Queue Stats Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('Queue_Stats', 'Queue Stats:') !!}
-    {!! Form::text('Queue_Stats', null, ['class' => 'form-control']) !!}
+    {!! Form::select('Queue_stats', ['1' => 'Yes', '0' => 'No'], null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Customer Report Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('Customer_Report', 'Customer Report:') !!}
-    {!! Form::text('Customer_Report', null, ['class' => 'form-control']) !!}
+    {!! Form::label('Customer_Report', 'Custom Report:') !!}
+    {!! Form::select('Customreport', ['1' => 'Yes', '0' => 'No'], '1', ['class' => 'form-control']) !!}
 </div>
 
 <!-- Q Panel Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('Q_Panel', 'Q Panel:') !!}
-    {!! Form::text('Q_Panel', null, ['class' => 'form-control']) !!}
+    {!! Form::select('Qpanel', ['1' => 'Yes', '0' => 'No'], '1', ['class' => 'form-control']) !!}
 </div>
 
 <!-- Ssh Port Field -->

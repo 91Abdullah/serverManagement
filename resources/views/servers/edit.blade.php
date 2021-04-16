@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-'namePage' => 'Servers',
+'namePage' => '',
 'class' => 'login-page sidebar-mini ',
 'activePage' => 'edit'
 ])
