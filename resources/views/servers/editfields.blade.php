@@ -138,32 +138,40 @@
 </div>
 @push('js')
 <script>
-function randomPassword(length) {
-    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
-    var pass = "";
-    for (var x = 0; x < length; x++) {
-        var i = Math.floor(Math.random() * chars.length);
-        pass += chars.charAt(i);
+    function randomPassword(length) {
+        var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+        var pass = "";
+        for (var x = 0; x < length; x++) {
+            var i = Math.floor(Math.random() * chars.length);
+            pass += chars.charAt(i);
+        }
+        Server_Password = document.getElementsByName('Server_Password');
+        Server_Password[0].value = pass;
     }
-    Server_Password=document.getElementsByName('Server_Password');
-    Server_Password[0].value = pass;
-}
-function randomPassword2(length) {
-    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
-    var pass = "";
-    for (var x = 0; x < length; x++) {
-        var i = Math.floor(Math.random() * chars.length);
-        pass += chars.charAt(i);
+
+    function randomPassword2(length) {
+        var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+        var pass = "";
+        for (var x = 0; x < length; x++) {
+            var i = Math.floor(Math.random() * chars.length);
+            pass += chars.charAt(i);
+        }
+        GUI_Password = document.getElementsByName('GUI_Password');
+        GUI_Password[0].value = pass;
     }
-    GUI_Password=document.getElementsByName('GUI_Password');
-    GUI_Password[0].value = pass;
-}
+
 </script>
 <script>
-function FillBilling(f) {
-  if(f.billingtoo.checked == true) {
-    f.Server_Password.value = f.GUI_Password.value;
-  }
-}
+    function FillBilling(f) {
+        if (f.billingtoo.checked == true) {
+            f.GUI_Password.value = f.Server_Password.value;
+            f.GUI_Password.readOnly = true;
+        }
+        else{
+            f.GUI_Password.readOnly = false;
+            f.GUI_Password.value = "";
+        }
+    }
+
 </script>
 @endpush
