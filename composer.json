@@ -6,12 +6,7 @@
         "framework",
         "laravel"
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "git@github.com:InfyOmLabs/swaggervel.git"
-        }
-    ],
+    
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -31,9 +26,7 @@
         "orangehill/iseed": "^3.0",
         "spatie/laravel-permission": "^4.0",
         "wildside/userstamps": "^2.1",
-        "yajra/laravel-datatables-oracle": "~9.0",
-        "appointer/swaggervel": "dev-master",
-        "infyomlabs/swagger-generator": "dev-master"
+        "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
         "bangnokia/laravel-serve-livereload": "^1.1",

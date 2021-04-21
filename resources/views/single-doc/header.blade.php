@@ -44,23 +44,23 @@
                 <!--//docs-logo-wrapper-->
                 <div class="docs-top-utilities d-flex justify-content-end align-items-center">
                     <div class="top-search-box d-none d-lg-flex">
-                        <form class="search-form">
+                        {{-- <form class="search-form">
                             <input type="text" placeholder="Search the docs..." name="search"
                                 class="form-control search-input">
                             <button type="submit" class="btn search-btn" value="Search"><i
                                     class="fas fa-search"></i></button>
-                        </form>
+                        </form> --}}
                     </div>
 
                     <ul class="social-list list-inline mx-md-3 mx-lg-5 mb-0 d-none d-lg-flex">
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
+                        {{-- <li class="list-inline-item"><a href="#"><i class="fab fa-github fa-fw"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="fab fa-slack fa-fw"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-product-hunt fa-fw"></i></a></li> --}}
                     </ul>
                     <!--//social-list-->
-                    <a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderdocs-free-bootstrap-4-documentation-template-for-software-projects/"
-                        class="btn btn-primary d-none d-lg-flex">Download</a>
+                    {{-- <a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/coderdocs-free-bootstrap-4-documentation-template-for-software-projects/"
+                        class="btn btn-primary d-none d-lg-flex">Download</a> --}}
                 </div>
                 <!--//docs-top-utilities-->
             </div>

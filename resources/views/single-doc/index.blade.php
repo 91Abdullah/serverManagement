@@ -11,7 +11,7 @@
                     </section>
                     <!--//docs-intro-->
 
-                    <h5>Github Code Example:</h5>
+                    {{-- <h5>Github Code Example:</h5>
                     <p>You can <a class="theme-link" href="#" target="_blank">embed your code
                             snippets using Github gists</a></p>
                     <div class="docs-code-block">
@@ -30,7 +30,7 @@
                     </p>
                     <div class="docs-code-block">
 
-                    </div>
+                    </div> --}}
                 </header>
             </article>
 
