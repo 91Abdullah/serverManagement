@@ -7,7 +7,7 @@
     </div>
     <nav id="docs-nav" class="docs-nav navbar">
         <ul class="section-items list-unstyled nav flex-column pb-3">
-            <li class="nav-item section-title"><a class="nav-link scrollto active" href="#section-1"><span
+            <li class="nav-item section-title"><a class="nav-link" href="{{ route('docs.index')}}"><span
                         class="theme-icon-holder mr-2"><i class="fas fa-map-signs"></i></span>Blogs</a></li>
 
             @foreach ($blogs as $blog)
