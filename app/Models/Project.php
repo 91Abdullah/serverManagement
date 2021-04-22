@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class Project
@@ -19,6 +20,7 @@ class Project extends Model
     use SoftDeletes;
 
     use HasFactory;
+    use LogsActivity;
 
     public $table = 'projects';
     

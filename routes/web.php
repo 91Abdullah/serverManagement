@@ -15,6 +15,7 @@ use App\Http\Controllers\SolutionTypeController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ActivityLoggerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +40,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('projects', App\Http\Controllers\ProjectController::class)->middleware('auth');
 Route::resource('cities', CityController::class)->middleware('auth');
 Route::resource('servers', ServersController::class)->middleware('auth');
+Route::resource('activitylogs', ActivityLoggerController::class)->middleware('auth');
 Route::resource('roles', RoleController::class)->middleware('auth');
 Route::resource('roleToUsers', RoleToUserController::class)->middleware('auth');
 Route::resource('users', UserController::class)->middleware('auth');

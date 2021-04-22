@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\Models\Activity;
+
 
 
 /**
@@ -29,6 +32,8 @@ class User extends Authenticatable
     use HasFactory;
 
     use HasRoles;
+
+    use LogsActivity;
 
     public $table = 'users';
     
@@ -87,6 +92,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Servers::class, 'update_by');
     }
-
+    
     
 }

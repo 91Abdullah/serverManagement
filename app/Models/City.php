@@ -6,6 +6,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 // use App\Models\Servers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * Class City
@@ -19,6 +20,7 @@ class City extends Model
     use SoftDeletes;
 
     use HasFactory;
+    use LogsActivity;
 
     public $table = 'cities';
     

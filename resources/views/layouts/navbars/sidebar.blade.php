@@ -104,6 +104,12 @@
                     <p> {{ __('Blogs') }} </p>
                 </a>
             </li>
+            <li class="@if ($activePage=='activitylogs' ) active @endif">
+                <a href="{{ route('activitylogs.index') }}">
+                    <i class="now-ui-icons design_bullet-list-67"></i>
+                    <p> {{ __('Activity Logs') }} </p>
+                </a>
+            </li>
             {{-- @endif
             @endif --}}
         </ul>
