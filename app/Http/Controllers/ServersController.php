@@ -22,6 +22,7 @@ use App\Models\Department;
 use App\Models\SolutionLocation;
 use App\Models\SolutionType;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 
 
 class ServersController extends AppBaseController
@@ -211,6 +212,86 @@ class ServersController extends AppBaseController
     public function fileImport(Request $request)
     {
 
+        $upload = $request->file('file');
+        $ext = \pathinfo($upload->getClientOriginalName(), PATHINFO_EXTENSION);
+        if($ext != 'csv'){
+            return \redirect()->back()->with('message', 'Please upload a CSV file');
+        }
+
+        $filepath=$upload->getRealPath();
+        
+        $file = fopen($filepath, 'r');
+        $header= fgetcsv($file);
+        $escapedHeader=[];
+
+        foreach($header as $key=>$value){
+            $lheader = \strtolower($value);
+            $escapedItem=preg_replace('/[^a-z]/', '', $lheader);
+            array_push($escapedHeader,$escapedItem);
+        }
+
+        while($columns=\fgetcsv($file)){
+            foreach($columns as $key => $value){
+                $value=preg_replace('/\D/','',$value);
+            }
+            $data = array_combine($escapedHeader, $columns);
+//  dd($data);
+            if($data['city'] != 'N/A' &&  $data['city'] != ''){
+                $SMS_city_data = City::firstOrCreate(['name' => $data['city']]);
+                $city_id = $SMS_city_data->id;
+            }
+            else{
+                $city_id = null;
+            }
+            $SMS_department_data = Department::firstOrCreate(['name' => $data['department']]);
+            $SMS_solution_location_data = SolutionLocation::firstOrCreate(['name' => $data['solutionlocation']]);
+            $SMS_solution_type_data = SolutionType::firstOrCreate(['name' => $data['solutiontype']]);
+
+            
+
+            $server = Servers::firstOrNew([ 'Customer_Name'=>$data['customername']]);
+
+            $server->Customer_Name = $data['customername'];
+            $server->Server_Password = $data['serverpassword'];
+
+            $server->Hardware = $data['hardware'];
+            $server->Service_Contract = $data['servicecontract'];
+            $server->Comment = $data['comment'];
+            if($server->ISD_Allowed == 1) { 
+                $data['isdallowed'] = 1 ;
+            }
+            $server->Failover_IP = $data['failoverip'];
+            $server->Winbox = $data['winbox'];
+            $server->Secondary_IP = $data['secondaryip'];
+            if($server->Queue_Stats == 1) {
+                $data['queuestats'] = 1;
+            }
+            if($server->Customer_Report == 1) { 
+                $data['customerreport'] = 1;
+            }
+            if($server->Q_Panel) { 
+                $data['qpanel'] = 1;
+            }
+            $server->SSH_PORT = $data['sshport'];
+            $server->HTTP_PORT = $data['httpport'];
+            $server->Webmin_PORT = $data['webminport'];
+            $server->IP = $data['ip'];
+            $server->Solution_Distro = $data['solutiondistro'];
+            $server->GUI_Password = $data['guipassword'];
+            $server->HTTPS_PORT = $data['httpsport'];
+            $server->city_id = $city_id;
+            $server->solution_location_id = $SMS_solution_location_data->id;
+            $server->department_id = $SMS_department_data->id;
+            $server->solution_type_id = $SMS_solution_type_data->id;
+            $server->created_at = Carbon::now()->timestamp;
+
+            $server->save();
+            Flash::success('Product imported successfully');
+            return redirect('servers')->with('import_message', 'Product imported successfully');
+        }
+        
+        return back();
+
         // Excel::import(new ServersImport, $request->import_file);
 
         // Session::put('success', 'Your file is imported successfully in database.');
@@ -220,17 +301,26 @@ class ServersController extends AppBaseController
         // Excel::import(new ServersImport, $request->file('file')->store('temp'));
         // return back();
 
-        Excel::import(new ServersImport, request()->file('file')->store('temp'));
-
-        return back();
-        echo "Inserted Successfully";
+        // $success=Excel::import(new ServersImport, request()->file('file')->store('temp'));
+        // if($success=1){
+        //     Flash::success('Inserted Successfully.');
+        // }
+        // else{
+        //     Flash::danger('Inserted Not Successful Successfully.');
+        // }
+        
+        //  return back();
+        // // echo "Inserted Successfully";
     }
 
 
 
-    public function fileExport($type)
+    public function fileExport()
     {
-        return Excel::download(new ServersExport, 'servers-collections.' . $type);
+        return Excel::download(new ServersExport, 'servers-collections.xlsx');
+
+        
+        
     }
 
     // public function search(Request $request)

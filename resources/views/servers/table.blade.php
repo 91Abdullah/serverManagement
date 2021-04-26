@@ -1,19 +1,22 @@
 <div class="table-responsive-sm">
     <div id="importexportmodal">
-        <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
-                <div class="custom-file text-left">
-                    <input type="file" name="file" required class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
-                </div>
+
+        {!! Form::open(['route' => 'file-import', 'method' => 'post', 'files' => true]) !!}
+        @csrf
+        <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
+            <div class="custom-file text-left">
+                <input type="file" name="file" required class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+
             </div>
-            <button type="submit" class="btn btn-primary">Import data</button>
-            {{-- <a class="btn btn-success" href="{{ route('file-export') }}">Export data</a> --}}
-            <a href="{{ route('file-export', 'xls') }}" class="btn btn-success" download>Download Excel xls</a>
-            <a href="{{ route('file-export', 'xlsx') }}" class="btn btn-success" download>Download Excel xlsx</a>
-            <a href="{{ route('file-export', 'csv') }}" class="btn btn-success" download>Download CSV</a>
-        </form>
+            <a class="btn btn-success" href="{{ asset('assets/sample_file/sample_servers.csv') }}">Download Sample CSV
+                File</a>
+        </div>
+        {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
+
+
+        <a href="{{ route('file-export') }}" class="btn btn-success" >Download CSV</a>
+        {!! Form::close() !!}
     </div>
     <button class="btn" id="btntotoggle">Import/Export <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
     <form action="{{ route('search') }}" method="GET">
@@ -41,7 +44,7 @@
                                         <th>S.no</th>
                                         <th>City</th>
                                         <th>Customer Name</th>
-                                        {{-- <th>Server Password</th> --}}
+                                        <th>Server Password</th>
                                         <th>Solution Location</th>
                                         <th>Solution Type</th>
                                         <th>Department</th>
@@ -62,6 +65,7 @@
                                         <th>HTTP Port</th>
                                         <th>HTTPS Port</th>
                                         <th>Webmin Port</th>
+                                        <th>Created Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,11 +101,8 @@
                                                 <td>{{ $number++ }}</td>
                                                 <td>{{ $server->city->name }}</td>
                                                 <td>{{ $server->Customer_Name }}</td>
-                                                {{-- @if ($is_admin)
-                                                    <td>{{ $servers->Server_Password }}</td>
-                                                @else
-                                                    <td>*************</td>
-                                                @endif --}}
+                                               <td>***********</td>
+                                               
                                                 <td>{{ $server->solutionLocation->name }}</td>
                                                 <td>{{ $server->solutionType->name }}</td>
                                                 <td>{{ $server->department->name }}</td>
@@ -134,33 +135,36 @@
                                                 @if ($server->Service_Contract == 'Yes')
                                                     <td><i class="fas fa-check-circle" style="color:green;"></i></td>
                                                 @else
-                                                    <td><i class="fas fa-times" style="color:red;"></i></td>                                                
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
                                                 @endif
                                                 <td>{{ $server->Comment }}</td>
                                                 @if ($server->ISD_Allowed == 'Yes')
                                                     <td><i class="fas fa-check-circle" style="color:green;"></i></td>
                                                 @else
-                                                    <td><i class="fas fa-times" style="color:red;"></i></td>                                                
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
                                                 @endif
                                                 <td>{{ $server->Failover_IP }}</td>
                                                 <td>{{ $server->Winbox }}</td>
                                                 <td>{{ $server->Secondary_IP }}</td>
                                                 @if ($server->Queue_Stats == 'Yes')
                                                     <td><a href="https://{{ $server->IP }}/queue-stats"
-                                                            target="_blank"><i class="fas fa-check-circle" style="color:green;"></i>Go</a></td>
+                                                            target="_blank"><i class="fas fa-check-circle"
+                                                                style="color:green;"></i>Go</a></td>
                                                 @else
                                                     <td><i class="fas fa-times" style="color:red;"></i></td>
                                                 @endif
                                                 @if ($server->Customer_Report == 'Yes')
                                                     <td><a href="https://{{ $server->IP }}/custom_report"
-                                                            target="_blank"><i class="fas fa-check-circle" style="color:green;"></i>Go</a></td>
+                                                            target="_blank"><i class="fas fa-check-circle"
+                                                                style="color:green;"></i>Go</a></td>
                                                 @else
                                                     <td><i class="fas fa-times" style="color:red;"></i></td>
                                                 @endif
 
                                                 @if ($server->Q_Panel == 'Yes')
-                                                    <td><a href="https://{{ $server->IP }}/qpanel"
-                                                            target="_blank"><i class="fas fa-check-circle" style="color:green;"></i>Go</a></td>
+                                                    <td><a href="https://{{ $server->IP }}/qpanel" target="_blank"><i
+                                                                class="fas fa-check-circle"
+                                                                style="color:green;"></i>Go</a></td>
                                                 @else
                                                     <td><i class="fas fa-times" style="color:red;"></i></td>
                                                 @endif
@@ -168,6 +172,8 @@
                                                 <td>{{ $server->HTTP_PORT }}</td>
                                                 <td>{{ $server->HTTPS_PORT }}</td>
                                                 <td>{{ $server->Webmin_PORT }}</td>
+                                                <td>{{ $server->created_at }}</td>
+                                                <td>{{ $server->update_at }}</td>
 
                                             </tr>
                                         @endforeach

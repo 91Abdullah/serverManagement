@@ -1,0 +1,7 @@
+"city_id","Customer_Name","Server_Password","solution_location_id","solution_type_id","department_id","Hardware","IP","Solution_Distro","Service_Contract","Comment","ISD_Allowed","Failover_IP","Winbox","Secondary_IP","Queue_Stats","Customer_Report","Q_Panel","SSH_PORT","HTTP_PORT","Webmin_PORT","created_at","updated_at","deleted_at"
+"Karachi","Muhammad Umair","2SxAwIj8j7cwv0hk27CW","1","4","1","Data","192.168.144.62","","Yes","","Yes","","","","Yes","Yes","Yes","22","80","10000","2021-04-01 12:26:06","2021-04-16 07:06:42",""
+"Karachi","Muhammad Umair","2SxAwIj8j7cwv0hk27CW","2","1","1","","10.89.189.108","","Yes","","No","","","","Yes","No","No","","","","2021-04-05 07:39:00","2021-04-16 07:30:51",""
+"Islamabad","Muhammad Umair","Ch1k6rFh+5DprE7*A91D","1","1","1","Data","21.12.12.17","","Yes","","","","","","","Yes","Yes","","","11060","2021-04-05 07:47:40","2021-04-05 07:47:40",""
+"Lahore","Khan Muhammad","d-s0!@+O4K&<r8bjhwx<","2","1","1","","21.12.12.15","","Yes","","Yes","","","","","","","","","","2021-04-06 05:47:22","2021-04-06 05:47:22",""
+"Islamabad","Ali Ahmed","6bP32z)0*2>2enaoiajv","2","4","1","","10.89.189.185","","No","","","","","","Yes","","Yes","","","","2021-04-06 05:48:25","2021-04-06 05:48:25",""
+"Karachi","Umair","","1","1","1","","","","","","","","","","","","","","","","2021-04-16 07:31:55","2021-04-16 07:31:55",""
