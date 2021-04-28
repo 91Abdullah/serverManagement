@@ -72,8 +72,8 @@ class ServersExport implements FromCollection, WithHeadings, WithMapping
             $server->HTTPS_PORT,
             $server->city->name,       
             $server->solutionLocation->name,
-            $server->solutionType->name,
             $server->department->name,
+            $server->solutionType->name,            
             $server->created_at,
         ];
     }

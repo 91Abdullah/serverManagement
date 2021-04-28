@@ -40,10 +40,10 @@ class ServersController extends AppBaseController
             SolutionType::pluck('name', 'id'),
             Department::pluck('name', 'id')
         ];
-        
-        $this->middleware('permission:server-list|server-create|server-edit|server-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:server-create', ['only' => ['create','store']]);
-        $this->middleware('permission:server-edit', ['only' => ['edit','update']]);
+
+        $this->middleware('permission:server-list|server-create|server-edit|server-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:server-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:server-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:server-delete', ['only' => ['destroy']]);
     }
 
@@ -96,7 +96,7 @@ class ServersController extends AppBaseController
     public function store(CreateServersRequest $request)
     {
         $servers = Servers::create($request->all());
-        return redirect()->route('servers.index')->with('success','Server created successfully.');
+        return redirect()->route('servers.index')->with('success', 'Server created successfully.');
     }
 
     /**
@@ -120,7 +120,7 @@ class ServersController extends AppBaseController
             return redirect(route('servers.index'));
         }
 
-        return view('servers.show', compact( 'somedropdowns'))->with('servers', $servers);
+        return view('servers.show', compact('somedropdowns'))->with('servers', $servers);
     }
 
     /**
@@ -171,7 +171,7 @@ class ServersController extends AppBaseController
 
         Flash::success('Servers updated successfully.');
 
-        return redirect()->route('servers.index')->with('success','Server updated successfully');
+        return redirect()->route('servers.index')->with('success', 'Server updated successfully');
     }
 
     /**
@@ -213,63 +213,78 @@ class ServersController extends AppBaseController
     {
 
         $upload = $request->file('file');
-        $ext = \pathinfo($upload->getClientOriginalName(), PATHINFO_EXTENSION);
-        if($ext != 'csv'){
-            return \redirect()->back()->with('message', 'Please upload a CSV file');
+        $ext = pathinfo($upload->getClientOriginalName(), PATHINFO_EXTENSION);
+        if ($ext != 'csv') {            
+            return redirect()->route('servers.index')->with('error','Please upload a CSV file');
         }
 
-        $filepath=$upload->getRealPath();
-        
+        $filepath = $upload->getRealPath();
+
         $file = fopen($filepath, 'r');
-        $header= fgetcsv($file);
-        $escapedHeader=[];
+        $header = fgetcsv($file);
+        $escapedHeader = [];
 
-        foreach($header as $key=>$value){
-            $lheader = \strtolower($value);
-            $escapedItem=preg_replace('/[^a-z]/', '', $lheader);
-            array_push($escapedHeader,$escapedItem);
+        foreach ($header as $key => $value) {
+            $lheader = strtolower($value);
+            $escapedItem = preg_replace('/[^a-z]/', '', $lheader);
+            array_push($escapedHeader, $escapedItem);
         }
 
-        while($columns=\fgetcsv($file)){
-            foreach($columns as $key => $value){
-                $value=preg_replace('/\D/','',$value);
+        while ($columns = fgetcsv($file)) {
+            foreach ($columns as $key => $value) {
+                $value = preg_replace('/\D/', '', $value);
             }
             $data = array_combine($escapedHeader, $columns);
-//  dd($data);
-            if($data['city'] != 'N/A' &&  $data['city'] != ''){
-                $SMS_city_data = City::firstOrCreate(['name' => $data['city']]);
-                $city_id = $SMS_city_data->id;
-            }
-            else{
-                $city_id = null;
-            }
-            $SMS_department_data = Department::firstOrCreate(['name' => $data['department']]);
-            $SMS_solution_location_data = SolutionLocation::firstOrCreate(['name' => $data['solutionlocation']]);
-            $SMS_solution_type_data = SolutionType::firstOrCreate(['name' => $data['solutiontype']]);
-
+            //  dd($data);
             
+            // $SMS_city_data = City::where('name' , '=', $data['city']);
+            $SMS_city_data = City::select('*')->where('name' , $data['city'])->first();
+            
+            if(!$SMS_city_data){
+                return redirect()->back()->with('error', 'City does not exist in the database.');
+            }
 
+            $SMS_department_data = Department::select('*')->where('name', $data['department'])->first();
+
+            if(!$SMS_department_data){
+                return redirect()->back()->with('error', 'Department does not exist in the database.');
+            } 
+
+            $SMS_solution_location_data = SolutionLocation::select('*')->where('name', $data['solutionlocation'])->first();
+
+            if(!$SMS_solution_location_data){
+                return redirect()->back()->with('error', 'Solution Location does not exist in the database.');
+            } 
+            $SMS_solution_type_data = SolutionType::select('*')->where('name' , $data['solutiontype'])->first();
+
+            if(!$SMS_solution_type_data){
+                return redirect()->back()->with('error', 'Solution Type does not exist in the database.');
+            } 
+            
+            // $server = Servers::firstOrNew(['Customer_Name' => $data['customername']]);
             $server = Servers::firstOrNew([ 'Customer_Name'=>$data['customername']]);
+        
 
+        
             $server->Customer_Name = $data['customername'];
             $server->Server_Password = $data['serverpassword'];
 
             $server->Hardware = $data['hardware'];
             $server->Service_Contract = $data['servicecontract'];
             $server->Comment = $data['comment'];
-            if($server->ISD_Allowed == 1) { 
-                $data['isdallowed'] = 1 ;
+            if ($server->ISD_Allowed == 1) {
+                $data['isdallowed'] = 1;
             }
             $server->Failover_IP = $data['failoverip'];
             $server->Winbox = $data['winbox'];
             $server->Secondary_IP = $data['secondaryip'];
-            if($server->Queue_Stats == 1) {
+            if ($server->Queue_Stats == 1) {
                 $data['queuestats'] = 1;
             }
-            if($server->Customer_Report == 1) { 
+            if ($server->Customer_Report == 1) {
                 $data['customerreport'] = 1;
             }
-            if($server->Q_Panel) { 
+            if ($server->Q_Panel) {
                 $data['qpanel'] = 1;
             }
             $server->SSH_PORT = $data['sshport'];
@@ -279,70 +294,28 @@ class ServersController extends AppBaseController
             $server->Solution_Distro = $data['solutiondistro'];
             $server->GUI_Password = $data['guipassword'];
             $server->HTTPS_PORT = $data['httpsport'];
-            $server->city_id = $city_id;
+            $server->city_id = $SMS_city_data->id;
             $server->solution_location_id = $SMS_solution_location_data->id;
             $server->department_id = $SMS_department_data->id;
             $server->solution_type_id = $SMS_solution_type_data->id;
             $server->created_at = Carbon::now()->timestamp;
-
             $server->save();
-            Flash::success('Product imported successfully');
-            return redirect('servers')->with('import_message', 'Product imported successfully');
+            Flash::success('Servers updated successfully.');
+
+                    
         }
-        
-        return back();
-
-        // Excel::import(new ServersImport, $request->import_file);
-
-        // Session::put('success', 'Your file is imported successfully in database.');
-
-        // return back();
-        // ------------------------
-        // Excel::import(new ServersImport, $request->file('file')->store('temp'));
-        // return back();
-
-        // $success=Excel::import(new ServersImport, request()->file('file')->store('temp'));
-        // if($success=1){
-        //     Flash::success('Inserted Successfully.');
+        // if($server->save()){
+        //     return redirect()->route('servers.index')->with('success','Servers imported successfully');
         // }
         // else{
-        //     Flash::danger('Inserted Not Successful Successfully.');
-        // }
-        
-        //  return back();
-        // // echo "Inserted Successfully";
+        //     return redirect()->route('servers.index')->with('error','Servers Not imported successfully');
+        // }  
+
     }
-
-
-
     public function fileExport()
     {
-        return Excel::download(new ServersExport, 'servers-collections.xlsx');
-
-        
-        
+        return Excel::download(new ServersExport, 'servers-collections.csv');
     }
-
-    // public function search(Request $request)
-    // {
-    //     if($request->ajax())
-    //     {
-    //         $output="";
-
-    //         $servers=Servers::select('id', 'Zone')->where('Zone','LIKE', '%'.$request->search."%")->get();
-
-    //         if($servers){
-    //             foreach ($servers as $key => $server) {
-    //                 $output.='<tr>'.
-    //                 '<td>'.$server->id.'</td>'.
-    //                 '<td>'.$server->Zone.'</td>'.
-    //                 '</tr>';
-    //             }
-    //             return Response($output);
-    //         }
-    //     }
-    // }   
-
     public function search(Request $request)
     {
         $somedropdowns = $this->somedropdowns;
