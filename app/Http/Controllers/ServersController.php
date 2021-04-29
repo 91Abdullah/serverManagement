@@ -235,31 +235,32 @@ class ServersController extends AppBaseController
                 $value = preg_replace('/\D/', '', $value);
             }
             $data = array_combine($escapedHeader, $columns);
-            //  dd($data);
+            dd($data);
             
             // $SMS_city_data = City::where('name' , '=', $data['city']);
-            $SMS_city_data = City::select('*')->where('name' , $data['city'])->first();
+            $SMS_city_data = City::firstOrCreate(['name' => $data['city']]);
+            // $lims_category_data = Category::firstOrCreate(['name' => $data['category'], 'is_active' => true]);
             
-            if(!$SMS_city_data){
-                return redirect()->back()->with('error', 'City does not exist in the database.');
-            }
+            // if(!$SMS_city_data){
+            //     return redirect()->back()->with('error', 'City does not exist in the database.');
+            // }
 
-            $SMS_department_data = Department::select('*')->where('name', $data['department'])->first();
+            $SMS_department_data = Department::firstOrCreate(['name' => $data['department']]);
 
-            if(!$SMS_department_data){
-                return redirect()->back()->with('error', 'Department does not exist in the database.');
-            } 
+            // if(!$SMS_department_data){
+            //     return redirect()->back()->with('error', 'Department does not exist in the database.');
+            // } 
 
-            $SMS_solution_location_data = SolutionLocation::select('*')->where('name', $data['solutionlocation'])->first();
+            $SMS_solution_location_data = SolutionLocation::firstOrCreate(['name' => $data['solutionlocation']]);
 
-            if(!$SMS_solution_location_data){
-                return redirect()->back()->with('error', 'Solution Location does not exist in the database.');
-            } 
-            $SMS_solution_type_data = SolutionType::select('*')->where('name' , $data['solutiontype'])->first();
+            // if(!$SMS_solution_location_data){
+            //     return redirect()->back()->with('error', 'Solution Location does not exist in the database.');
+            // } 
+            $SMS_solution_type_data = SolutionType::firstOrCreate(['name' , $data['solutiontype']]);
 
-            if(!$SMS_solution_type_data){
-                return redirect()->back()->with('error', 'Solution Type does not exist in the database.');
-            } 
+            // if(!$SMS_solution_type_data){
+            //     return redirect()->back()->with('error', 'Solution Type does not exist in the database.');
+            // } 
             
             // $server = Servers::firstOrNew(['Customer_Name' => $data['customername']]);
             $server = Servers::firstOrNew([ 'Customer_Name'=>$data['customername']]);
