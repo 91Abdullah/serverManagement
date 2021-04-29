@@ -300,10 +300,10 @@ class ServersController extends AppBaseController
             $server->solution_type_id = $SMS_solution_type_data->id;
             $server->created_at = Carbon::now()->timestamp;
             $server->save();
-            Flash::success('Servers updated successfully.');
 
                     
         }
+        return redirect()->route('servers.index')->with('success','Servers imported successfully');
         // if($server->save()){
         //     return redirect()->route('servers.index')->with('success','Servers imported successfully');
         // }
