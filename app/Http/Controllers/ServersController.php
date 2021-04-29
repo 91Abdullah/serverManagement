@@ -235,7 +235,7 @@ class ServersController extends AppBaseController
                 $value = preg_replace('/\D/', '', $value);
             }
             $data = array_combine($escapedHeader, $columns);
-            dd($data);
+            // dd($data);
             
             // $SMS_city_data = City::where('name' , '=', $data['city']);
             $SMS_city_data = City::firstOrCreate(['name' => $data['city']]);
