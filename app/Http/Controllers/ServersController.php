@@ -47,9 +47,6 @@ class ServersController extends AppBaseController
         $this->middleware('permission:server-delete', ['only' => ['destroy']]);
     }
 
-    // $city = City::pluck('name', 'id'),
-    // $solutionLocation = SolutionLocation::pluck('name', 'id'),
-    // $solutionType = SolutionType::pluck('name', 'id')
 
 
     /**
@@ -63,12 +60,9 @@ class ServersController extends AppBaseController
     {
         $somedropdowns = $this->somedropdowns;
         $number = 0;
-        // $user = Auth::user();
-        // $is_admin = $user->RoleUser[0]->role->name == "Admin";
 
-        $servers = Servers::paginate(10);
+        $servers = Servers::paginate(6);
 
-        // return view('servers.index')->with('servers', $servers);
         return view('servers.index', compact('servers', 'number', 'somedropdowns'));
     }
     /**
@@ -80,8 +74,6 @@ class ServersController extends AppBaseController
     {
         $somedropdowns = $this->somedropdowns;
         $user = Auth::user()->id;
-        // $user2 = Auth::user();
-        // $is_admin = $user2->RoleUser[0]->role->name == "Admin";
 
         return view('servers.create', compact('user',  'somedropdowns'));
     }
@@ -111,8 +103,6 @@ class ServersController extends AppBaseController
         $somedropdowns = $this->somedropdowns;
 
         $servers = $this->serversRepository->find($id);
-        // $user = Auth::user();
-        // $is_admin = $user->RoleUser[0]->role->name == "Admin";
 
         if (empty($servers)) {
             Flash::error('Servers not found');
@@ -136,10 +126,6 @@ class ServersController extends AppBaseController
 
         $user = Auth::user()->id;
         $server = $this->serversRepository->find($id);
-        // $user2 = Auth::user();
-        // $is_admin = $user2->RoleUser[0]->role->name == "Admin";
-
-        // dd($server);
         if (empty($server)) {
             Flash::error('Servers not found');
 
@@ -202,8 +188,6 @@ class ServersController extends AppBaseController
 
     public function fileImportExport()
     {
-        // $user = Auth::user();
-        // $is_admin = $user->RoleUser[0]->role->name == "Admin";
         return view('servers.index');
     }
 
@@ -214,116 +198,89 @@ class ServersController extends AppBaseController
 
         $upload = $request->file('file');
         $ext = pathinfo($upload->getClientOriginalName(), PATHINFO_EXTENSION);
-        if ($ext != 'csv') {            
+        if ($ext == 'csv') {   
+            $filepath = $upload->getRealPath();
+
+            $file = fopen($filepath, 'r');
+            $header = fgetcsv($file);
+            $escapedHeader = [];
+    
+            foreach ($header as $key => $value) {
+                $lheader = strtolower($value);
+                $escapedItem = preg_replace('/[^a-z]/', '', $lheader);
+                array_push($escapedHeader, $escapedItem);
+            }            
+            while ($columns = fgetcsv($file)) {
+                foreach ($columns as $key => $value) {
+                    $value = preg_replace('/\D/', '', $value);
+                }
+                $data = array_combine($escapedHeader, $columns);
+                // dd($data);
+                
+                $SMS_city_data = City::firstOrCreate(['name' => $data['city']]);
+                $SMS_department_data = Department::firstOrCreate(['name' => $data['department']]);
+                $SMS_solution_location_data = SolutionLocation::firstOrCreate(['name' => $data['solutionlocation']]);
+                $SMS_solution_type_data = SolutionType::firstOrCreate(['name' =>  $data['solutiontype']]);
+                $server = Servers::firstOrNew([ 'Customer_Name'=>$data['customername']]);
+                $server->Customer_Name = $data['customername'];
+                $server->Server_Password = $data['serverpassword'];
+    
+                $server->Hardware = $data['hardware'];
+                if($server->Service_Contract == 1){
+                    $data['servicecontract'] = 1;
+                }
+                $server->Comment = $data['comment'];
+                if ($server->ISD_Allowed == 1) {
+                    $data['isdallowed'] = 1;
+                }
+                $server->Failover_IP = $data['failoverip'];
+                $server->Winbox = $data['winbox'];
+                $server->Secondary_IP = $data['secondaryip'];
+                if ($server->Queue_Stats == 1) {
+                    $data['queuestats'] = 1;
+                }
+                if ($server->Customer_Report == 1) {
+                    $data['customerreport'] = 1;
+                }
+                if ($server->Q_Panel) {
+                    $data['qpanel'] = 1;
+                }
+                $server->SSH_PORT = $data['sshport'];
+                $server->HTTP_PORT = $data['httpport'];
+                $server->Webmin_PORT = $data['webminport'];
+                $server->IP = $data['ip'];
+                $server->Solution_Distro = $data['solutiondistro'];
+                $server->GUI_Password = $data['guipassword'];
+                $server->HTTPS_PORT = $data['httpsport'];
+                $server->city_id = $SMS_city_data->id;
+                $server->solution_location_id = $SMS_solution_location_data->id;
+                $server->department_id = $SMS_department_data->id;
+                $server->solution_type_id = $SMS_solution_type_data->id;
+                $server->created_at = Carbon::now()->timestamp;
+                
+                $server->save();
+            }           
+        }
+        else{
             return redirect()->route('servers.index')->with('error','Please upload a CSV file');
-        }
-
-        $filepath = $upload->getRealPath();
-
-        $file = fopen($filepath, 'r');
-        $header = fgetcsv($file);
-        $escapedHeader = [];
-
-        foreach ($header as $key => $value) {
-            $lheader = strtolower($value);
-            $escapedItem = preg_replace('/[^a-z]/', '', $lheader);
-            array_push($escapedHeader, $escapedItem);
-        }
-
-        while ($columns = fgetcsv($file)) {
-            foreach ($columns as $key => $value) {
-                $value = preg_replace('/\D/', '', $value);
-            }
-            $data = array_combine($escapedHeader, $columns);
-            // dd($data);
-            
-            // $SMS_city_data = City::where('name' , '=', $data['city']);
-            $SMS_city_data = City::firstOrCreate(['name' => $data['city']]);
-            // $lims_category_data = Category::firstOrCreate(['name' => $data['category'], 'is_active' => true]);
-            
-            // if(!$SMS_city_data){
-            //     return redirect()->back()->with('error', 'City does not exist in the database.');
-            // }
-
-            $SMS_department_data = Department::firstOrCreate(['name' => $data['department']]);
-
-            // if(!$SMS_department_data){
-            //     return redirect()->back()->with('error', 'Department does not exist in the database.');
-            // } 
-
-            $SMS_solution_location_data = SolutionLocation::firstOrCreate(['name' => $data['solutionlocation']]);
-
-            // if(!$SMS_solution_location_data){
-            //     return redirect()->back()->with('error', 'Solution Location does not exist in the database.');
-            // } 
-            $SMS_solution_type_data = SolutionType::firstOrCreate(['name' =>  $data['solutiontype']]);
-
-            // if(!$SMS_solution_type_data){
-            //     return redirect()->back()->with('error', 'Solution Type does not exist in the database.');
-            // } 
-            
-            // $server = Servers::firstOrNew(['Customer_Name' => $data['customername']]);
-            $server = Servers::firstOrNew([ 'Customer_Name'=>$data['customername']]);
+        }      
         
-
         
-            $server->Customer_Name = $data['customername'];
-            $server->Server_Password = $data['serverpassword'];
-
-            $server->Hardware = $data['hardware'];
-            if($server->Service_Contract == 1){
-                $data['servicecontract'] = 1;
-            }
-            $server->Comment = $data['comment'];
-            if ($server->ISD_Allowed == 1) {
-                $data['isdallowed'] = 1;
-            }
-            $server->Failover_IP = $data['failoverip'];
-            $server->Winbox = $data['winbox'];
-            $server->Secondary_IP = $data['secondaryip'];
-            if ($server->Queue_Stats == 1) {
-                $data['queuestats'] = 1;
-            }
-            if ($server->Customer_Report == 1) {
-                $data['customerreport'] = 1;
-            }
-            if ($server->Q_Panel) {
-                $data['qpanel'] = 1;
-            }
-            $server->SSH_PORT = $data['sshport'];
-            $server->HTTP_PORT = $data['httpport'];
-            $server->Webmin_PORT = $data['webminport'];
-            $server->IP = $data['ip'];
-            $server->Solution_Distro = $data['solutiondistro'];
-            $server->GUI_Password = $data['guipassword'];
-            $server->HTTPS_PORT = $data['httpsport'];
-            $server->city_id = $SMS_city_data->id;
-            $server->solution_location_id = $SMS_solution_location_data->id;
-            $server->department_id = $SMS_department_data->id;
-            $server->solution_type_id = $SMS_solution_type_data->id;
-            $server->created_at = Carbon::now()->timestamp;
-            $server->save();
-
-                    
-        }
         return redirect()->route('servers.index')->with('success','Servers imported successfully');
-        // if($server->save()){
-        //     return redirect()->route('servers.index')->with('success','Servers imported successfully');
-        // }
-        // else{
-        //     return redirect()->route('servers.index')->with('error','Servers Not imported successfully');
-        // }  
-
     }
+
+
+
     public function fileExport()
     {
         return Excel::download(new ServersExport, 'servers-collections.csv');
     }
+
+
+
     public function search(Request $request)
     {
         $somedropdowns = $this->somedropdowns;
-        // $user = Auth::user();
-        // $is_admin = $user->RoleUser[0]->role->name == "Admin";
         $search = $request->input('search');
 
         $servers = Servers::select('*')->where('Zone', 'LIKE', '%' . $request->search . "%")->orWhere('Customer_Name', 'LIKE', '%' . $request->search . "%")->paginate(5);

@@ -37,6 +37,11 @@
         border: 2px solid #fff;
         color: #fff;
     }
+    .sticky{
+      position: sticky; 
+      top: 0px; 
+      background:white;
+    }
 
     
 

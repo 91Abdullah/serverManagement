@@ -40,32 +40,32 @@
                             <table class="table table-striped" id="servers-table" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Actions</th>
-                                        <th>S.no</th>
-                                        <th>City</th>
-                                        <th>Customer Name</th>
-                                        <th>Server Password</th>
-                                        <th>Solution Location</th>
-                                        <th>Solution Type</th>
-                                        <th>Department</th>
-                                        <th>Hardware</th>
-                                        <th>Server Primary IP</th>
-                                        <th>Run</th>
-                                        <th>Solution Distro</th>
-                                        <th>Service Contract</th>
-                                        <th>Comment</th>
-                                        <th>ISD Allowed</th>
-                                        <th>Failover IP</th>
-                                        <th>Winbox</th>
-                                        <th>Secondary IP</th>
-                                        <th>Queue Stats</th>
-                                        <th>Custom Report</th>
-                                        <th>Q Panel</th>
-                                        <th>SSH Port</th>
-                                        <th>HTTP Port</th>
-                                        <th>HTTPS Port</th>
-                                        <th>Webmin Port</th>
-                                        <th>Created Date</th>
+                                        <td class="sticky"><strong>Actions</strong></td>
+                                        <td class="sticky"><strong>S.no</strong></td>
+                                        <td class="sticky"><strong>City</strong></td>
+                                        <td class="sticky"><strong>Customer Name</strong></td>
+                                        <td class="sticky"><strong>Server Password</strong></td>
+                                        <td class="sticky"><strong>Solution Location</strong></td>
+                                        <td class="sticky"><strong>Solution Type</strong></td>
+                                        <td class="sticky"><strong>Department</strong></td>
+                                        <td class="sticky"><strong>Hardware</strong></td>
+                                        <td class="sticky"><strong>Server Primary IP</strong></td>
+                                        <td><strong>Run</strong></td>
+                                        <td class="sticky"><strong>Solution Distro</strong></td>
+                                        <td class="sticky"><strong>Service Contract</strong></td>
+                                        <td class="sticky"><strong>Comment</strong></td>
+                                        <td class="sticky"><strong>ISD Allowed</strong></td>
+                                        <td class="sticky"><strong>Failover IP</strong></td>
+                                        <td class="sticky"><strong>Winbox</strong></td>
+                                        <td class="sticky"><strong>Secondary IP</strong></td>
+                                        <td class="sticky"><strong>Queue Stats</strong></td>
+                                        <td class="sticky"><strong>Custom Report</strong></td>
+                                        <td class="sticky"><strong>Q Panel</strong></td>
+                                        <td class="sticky"><strong>SSH Port</strong></td>
+                                        <td class="sticky"><strong>HTTP Port</strong></td>
+                                        <td class="sticky"><strong>HTTPS Port</strong></td>
+                                        <td class="sticky"><strong>Webmin Port</strong></td>
+                                        <td class="sticky"><strong>Created Date</strong></td>
                                     </tr>
                                 </thead>
                                 <tbody>
