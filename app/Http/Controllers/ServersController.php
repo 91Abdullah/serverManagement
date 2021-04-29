@@ -256,7 +256,7 @@ class ServersController extends AppBaseController
             // if(!$SMS_solution_location_data){
             //     return redirect()->back()->with('error', 'Solution Location does not exist in the database.');
             // } 
-            $SMS_solution_type_data = SolutionType::firstOrCreate(['name' , $data['solutiontype']]);
+            $SMS_solution_type_data = SolutionType::firstOrCreate(['name' =>  $data['solutiontype']]);
 
             // if(!$SMS_solution_type_data){
             //     return redirect()->back()->with('error', 'Solution Type does not exist in the database.');
