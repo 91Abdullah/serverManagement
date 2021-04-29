@@ -271,7 +271,9 @@ class ServersController extends AppBaseController
             $server->Server_Password = $data['serverpassword'];
 
             $server->Hardware = $data['hardware'];
-            $server->Service_Contract = $data['servicecontract'];
+            if($server->Service_Contract == 1){
+                $data['servicecontract'] = 1;
+            }
             $server->Comment = $data['comment'];
             if ($server->ISD_Allowed == 1) {
                 $data['isdallowed'] = 1;
