@@ -157,7 +157,7 @@ class ServersController extends AppBaseController
 
         Flash::success('Servers updated successfully.');
 
-        return redirect()->route('servers.index')->with('success', 'Server updated successfully');
+        return redirect()->route('servers.index');
     }
 
     /**
@@ -217,10 +217,39 @@ class ServersController extends AppBaseController
                 $data = array_combine($escapedHeader, $columns);
                 // dd($data);
                 
-                $SMS_city_data = City::firstOrCreate(['name' => $data['city']]);
-                $SMS_department_data = Department::firstOrCreate(['name' => $data['department']]);
-                $SMS_solution_location_data = SolutionLocation::firstOrCreate(['name' => $data['solutionlocation']]);
-                $SMS_solution_type_data = SolutionType::firstOrCreate(['name' =>  $data['solutiontype']]);
+                if($data['city'] != 'N/A' && $data['city'] != ''){
+                    $SMS_city_data = City::firstOrCreate(['name' => $data['city']]);
+                    $city_id = $SMS_city_data->id;
+                }
+                else{
+                    $city_id = null;
+                }
+                
+                if($data['department'] != 'N/A' && $data['department'] != ''){
+                    $SMS_department_data = Department::firstOrCreate(['name' => $data['department']]);
+                    $department_id = $SMS_department_data->id;
+                }
+                else{
+                    $department_id = null;
+                }
+
+                if($data['solutionlocation'] != 'N/A' && $data['solutionlocation'] != ''){
+                    $SMS_solution_location_data = SolutionLocation::firstOrCreate(['name' => $data['solutionlocation']]);
+                    $solution_location_id = $SMS_solution_location_data->id;
+                }
+                else{
+                    $solution_location_id = null;
+                }
+                
+                if($data['solutiontype'] != 'N/A' && $data['solutiontype'] != ''){
+                    $SMS_solution_type_data = SolutionType::firstOrCreate(['name' =>  $data['solutiontype']]);
+                    $solution_type_id = $SMS_solution_type_data->id;
+                }
+                else{
+                    $solution_type_id = null;
+                }
+
+                
                 $server = Servers::firstOrNew([ 'Customer_Name'=>$data['customername']]);
                 $server->Customer_Name = $data['customername'];
                 $server->Server_Password = $data['serverpassword'];
@@ -252,10 +281,10 @@ class ServersController extends AppBaseController
                 $server->Solution_Distro = $data['solutiondistro'];
                 $server->GUI_Password = $data['guipassword'];
                 $server->HTTPS_PORT = $data['httpsport'];
-                $server->city_id = $SMS_city_data->id;
-                $server->solution_location_id = $SMS_solution_location_data->id;
-                $server->department_id = $SMS_department_data->id;
-                $server->solution_type_id = $SMS_solution_type_data->id;
+                $server->city_id = $city_id;
+                $server->solution_location_id = $solution_location_id;
+                $server->department_id = $department_id;
+                $server->solution_type_id = $solution_type_id;
                 $server->created_at = Carbon::now()->timestamp;
                 
                 $server->save();

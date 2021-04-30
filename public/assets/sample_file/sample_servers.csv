@@ -1,4 +1,11 @@
 customername,serverpassword,hardware,servicecontract,comment,isdallowed,failoverip,winbox,secondaryip,queuestats,customerreport,qpanel,sshport,httpport,webminport,ip,solutiondistro,guipassword,httpsport,city,solutionlocation,department,solutiontype
-ABC_Name,2SxAwIj8j7c156sa1d5627CW,Data,Yes,Nothing,No,10.15.15.50,123,192.168.1.1,Yes,No,No,80,81,81,192.168.1.1,FreePBX,2SxAwIj8j7c156sa1d5627CW,122,Lahore,Hosted,FEET,IPeX
-EFG_Name,2SxAwasdj7c156sa1d5627CW,Data,No,Testing,Yes,12.202.154.0,321,127.0.0.1,No,Yes,No,8080,56,56,192.168.1.2,FreePBX,2SxAwIj8j7c156sa1d5627CW,45,Islamabad,Resided,IT,Contact Plus
-HIJ_Name,2SxAwasdj7c15651651a27CW,Data,Yes,Very nice server,No,1.1.1.1,147,192.168.104.202,Yes,Yes,No,456,21,21,192.168.1.3,FreePBX,2SxAwIj8j7c156sa1d5627CW,12,Karachi,Hosted,ABC,CRM
+Lenovo,2SxAwIj8j7c156sa1d5627CW,Data,Yes,Nothing,No,10.15.15.50,123,192.168.1.1,Yes,No,No,80,81,81,192.168.1.1,FreePBX,2SxAwIj8j7c156sa1d5627CW,122,Lahore,Hostee,FEET,IPeX
+Motorola,2SxAwasdj7c156sa1d5627CW,Data,No,Testing,Yes,12.202.154.0,321,127.0.0.1,No,Yes,No,8080,56,56,192.168.1.2,FreePBX,2SxAwIj8j7c156sa1d5627CW,45,Islamabad,Shah,IT,Contact Plus
+Samsung,2SxAwasdj7c15651651a27CW,Data,Yes,Very nice server,No,1.1.1.1,147,192.168.104.202,Yes,Yes,No,456,21,21,192.168.1.3,FreePBX,2SxAwIj8j7c156sa1d5627CW,12,Karachi,Redised,ABC,CRM
+VIVO,2SxAwasdj7c15651651a27CW,Data,Yes,Very nice server,No,1.1.1.1,147,192.168.104.202,Yes,Yes,No,456,21,21,192.168.1.3,FreePBX,2SxAwIj8j7c156sa1d5627CW,12,Rawalpindi,DAS,TECH,HRM
+OPPO,2SxAwasdj7c15651651a27CW,Data,Yes,Very nice server,No,1.1.1.1,147,192.168.104.202,Yes,Yes,No,456,21,21,192.168.1.3,FreePBX,2SxAwIj8j7c156sa1d5627CW,12,Mansehra,Sided,SUPPORT,CMS
+Redmi,2SxAwasdj7c15651651a27CW,,,Very nice server,,1.1.1.1,147,192.168.104.202,,,,456,21,21,192.168.1.3,FreePBX,2SxAwIj8j7c156sa1d5627CW,12,Hyderabad,Reversed,SUPPORT,CMS
+Realme,2SxAwasdj7c15651651a27CW,,,Very nice server,,1.1.1.1,147,192.168.104.202,,,,456,21,21,192.168.1.3,FreePBX,2SxAwIj8j7c156sa1d5627CW,12,Hyderabad,Reversed,SUPPORT,CMS
+Poco,2SxAwasdj7c15651651a27CW,,,Very nice server,,1.1.1.1,147,192.168.104.202,,,,456,21,21,192.168.1.3,FreePBX,2SxAwIj8j7c156sa1d5627CW,12,Hyderabad,Reversed,SUPPORT,CMS
+ABC Mobile,2SxAwasdj7c15651651a27CW,,,Very nice server,,1.1.1.1,147,192.168.104.202,,,,456,21,21,192.168.1.3,FreePBX,2SxAwIj8j7c156sa1d5627CW,12,Hyderabad,Reversed,SUPPORT,CMS
+Huawie,2SxAwasdj7c15651651a27CW,,,Very nice server,,1.1.1.1,147,192.168.104.202,,,,456,21,21,192.168.1.3,FreePBX,2SxAwIj8j7c156sa1d5627CW,12,Hyderabad,Reversed,SUPPORT,CMS

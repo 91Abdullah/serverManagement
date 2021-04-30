@@ -19,59 +19,138 @@
         {!! Form::close() !!}
     </div>
     <button class="btn" id="btntotoggle">Import/Export <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
-    <form action="{{ route('search') }}" method="GET">
-        <input type="text" name="search" required />
-        <button class="btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-    </form>
+    
     <div class="content">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
+                       
                         @can('server-create')
                             <a class="btn btn-primary btn-round text-white pull-right"
                                 href="{{ route('servers.create') }}">Add Server</a>
                         @endcan
+                        <form action="{{ route('search') }}" class="pull-right" method="GET">
+                            <input type="text" name="search" required />
+                            <button class="btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </form>
                         <h4 class="card-title">Servers</h4>
-                        <div class="col-12 mt-2"></div>
+                        
                     </div>
                     <div class="card-body">
-                        <div class="toolbar" style="overflow-x:auto; overflow-y:auto;">
+                        <div class="toolbar" style="overflow-x: auto;">
                             <table class="table table-striped" id="servers-table" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <td class="sticky"><strong>Actions</strong></td>
-                                        <td class="sticky"><strong>S.no</strong></td>
+                                        <td class="sticky"><strong>S.</br>no</strong></td>
                                         <td class="sticky"><strong>City</strong></td>
                                         <td class="sticky"><strong>Customer Name</strong></td>
-                                        <td class="sticky"><strong>Server Password</strong></td>
-                                        <td class="sticky"><strong>Solution Location</strong></td>
-                                        <td class="sticky"><strong>Solution Type</strong></td>
-                                        <td class="sticky"><strong>Department</strong></td>
-                                        <td class="sticky"><strong>Hardware</strong></td>
+                                        {{-- <td class="sticky">Server Password</td>
+                                        <td class="sticky">Solution Location</td>
+                                        <td class="sticky">Solution Type</td>
+                                        <td class="sticky">Department</td>
+                                        <td class="sticky">Hardware</td> --}}
                                         <td class="sticky"><strong>Server Primary IP</strong></td>
                                         <td><strong>Run</strong></td>
-                                        <td class="sticky"><strong>Solution Distro</strong></td>
+                                        {{-- <td class="sticky"><strong>Solution Distro</strong></td>
                                         <td class="sticky"><strong>Service Contract</strong></td>
                                         <td class="sticky"><strong>Comment</strong></td>
-                                        <td class="sticky"><strong>ISD Allowed</strong></td>
+                                        <td class="sticky"><strong>ISD Allowed</strong></td> --}}
                                         <td class="sticky"><strong>Failover IP</strong></td>
                                         <td class="sticky"><strong>Winbox</strong></td>
                                         <td class="sticky"><strong>Secondary IP</strong></td>
                                         <td class="sticky"><strong>Queue Stats</strong></td>
                                         <td class="sticky"><strong>Custom Report</strong></td>
                                         <td class="sticky"><strong>Q Panel</strong></td>
-                                        <td class="sticky"><strong>SSH Port</strong></td>
-                                        <td class="sticky"><strong>HTTP Port</strong></td>
-                                        <td class="sticky"><strong>HTTPS Port</strong></td>
-                                        <td class="sticky"><strong>Webmin Port</strong></td>
+                                        {{-- <td class="sticky">SSH Port</td>
+                                        <td class="sticky">HTTP Port</td>
+                                        <td class="sticky">HTTPS Port</td>
+                                        <td class="sticky">Webmin Port</td> --}}
                                         <td class="sticky"><strong>Created Date</strong></td>
+                                        <td class="sticky"><strong>Actions</strong></td>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if ($servers->isNotEmpty())
                                         @foreach ($servers as $server)
                                             <tr>
+                                                
+                                                <td>{{ $number++ }}</td>
+                                                <td>{{ $server->city->name }}</td>
+                                                <td>{{ $server->Customer_Name }}</td>
+                                                {{-- <td>***********</td>
+                                               
+                                                <td>{{ $server->solutionLocation->name }}</td>
+                                                <td>{{ $server->solutionType->name }}</td>
+                                                <td>{{ $server->department->name }}</td>
+                                                <td>{{ $server->Hardware }}</td> --}}
+                                                <td>{{ $server->IP }}</td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-info dropdown-toggle" type="button"
+                                                            id="dropdownMenuButton" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">
+                                                            With
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="https://{{ $server->IP . ':' . $server->SSH_PORT }}">SSH
+                                                                PORT</a>
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="http://{{ $server->IP . ':' . $server->HTTP_PORT }}">HTTP
+                                                                PORT</a>
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="https://{{ $server->IP . ':' . $server->HTTPS_PORT }}">HTTPS
+                                                                PORT</a>
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="https://{{ $server->IP . ':' . $server->Webmin_PORT }}">Webmin
+                                                                PORT</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                {{-- <td>{{ $server->Solution_Distro }}</td>
+                                                @if ($server->Service_Contract == 'Yes')
+                                                    <td><i class="fas fa-check-circle" style="color:green;"></i></td>
+                                                @else
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
+                                                @endif
+                                                <td>{{ $server->Comment }}</td>
+                                                @if ($server->ISD_Allowed == 'Yes')
+                                                    <td><i class="fas fa-check-circle" style="color:green;"></i></td>
+                                                @else
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
+                                                @endif --}}
+                                                <td>{{ $server->Failover_IP }}</td>
+                                                <td>{{ $server->Winbox }}</td>
+                                                <td>{{ $server->Secondary_IP }}</td>
+                                                @if ($server->Queue_Stats == 'Yes')
+                                                    <td><a href="https://{{ $server->IP }}/queue-stats"
+                                                            target="_blank"><i class="fas fa-check-circle"
+                                                                style="color:green;"></i>Go</a></td>
+                                                @else
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
+                                                @endif
+                                                @if ($server->Customer_Report == 'Yes')
+                                                    <td><a href="https://{{ $server->IP }}/custom_report"
+                                                            target="_blank"><i class="fas fa-check-circle"
+                                                                style="color:green;"></i>Go</a></td>
+                                                @else
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
+                                                @endif
+
+                                                @if ($server->Q_Panel == 'Yes')
+                                                    <td><a href="https://{{ $server->IP }}/qpanel" target="_blank"><i
+                                                                class="fas fa-check-circle"
+                                                                style="color:green;"></i>Go</a></td>
+                                                @else
+                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
+                                                @endif
+                                                {{-- <td>{{ $server->SSH_PORT }}</td>
+                                                <td>{{ $server->HTTP_PORT }}</td>
+                                                <td>{{ $server->HTTPS_PORT }}</td>
+                                                <td>{{ $server->Webmin_PORT }}</td>
+                                                <td>{{ $server->updated_at }}</td> --}}
+                                                <td>{{ $server->created_at }}</td>
                                                 <td>
                                                     {!! Form::open(['route' => ['servers.destroy', $server->id], 'method' => 'delete']) !!}
                                                     <div class=''>
@@ -98,88 +177,11 @@
                                                     </div>
                                                     {!! Form::close() !!}
                                                 </td>
-                                                <td>{{ $number++ }}</td>
-                                                <td>{{ $server->city->name }}</td>
-                                                <td>{{ $server->Customer_Name }}</td>
-                                               <td>***********</td>
-                                               
-                                                <td>{{ $server->solutionLocation->name }}</td>
-                                                <td>{{ $server->solutionType->name }}</td>
-                                                <td>{{ $server->department->name }}</td>
-                                                <td>{{ $server->Hardware }}</td>
-                                                <td>{{ $server->IP }}</td>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-info dropdown-toggle" type="button"
-                                                            id="dropdownMenuButton" data-toggle="dropdown"
-                                                            aria-haspopup="true" aria-expanded="false">
-                                                            With
-                                                        </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" target="_blank"
-                                                                href="https://{{ $server->IP . ':' . $server->SSH_PORT }}">SSH
-                                                                PORT</a>
-                                                            <a class="dropdown-item" target="_blank"
-                                                                href="http://{{ $server->IP . ':' . $server->HTTP_PORT }}">HTTP
-                                                                PORT</a>
-                                                            <a class="dropdown-item" target="_blank"
-                                                                href="https://{{ $server->IP . ':' . $server->HTTPS_PORT }}">HTTPS
-                                                                PORT</a>
-                                                            <a class="dropdown-item" target="_blank"
-                                                                href="https://{{ $server->IP . ':' . $server->Webmin_PORT }}">Webmin
-                                                                PORT</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>{{ $server->Solution_Distro }}</td>
-                                                @if ($server->Service_Contract == 'Yes')
-                                                    <td><i class="fas fa-check-circle" style="color:green;"></i></td>
-                                                @else
-                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
-                                                @endif
-                                                <td>{{ $server->Comment }}</td>
-                                                @if ($server->ISD_Allowed == 'Yes')
-                                                    <td><i class="fas fa-check-circle" style="color:green;"></i></td>
-                                                @else
-                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
-                                                @endif
-                                                <td>{{ $server->Failover_IP }}</td>
-                                                <td>{{ $server->Winbox }}</td>
-                                                <td>{{ $server->Secondary_IP }}</td>
-                                                @if ($server->Queue_Stats == 'Yes')
-                                                    <td><a href="https://{{ $server->IP }}/queue-stats"
-                                                            target="_blank"><i class="fas fa-check-circle"
-                                                                style="color:green;"></i>Go</a></td>
-                                                @else
-                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
-                                                @endif
-                                                @if ($server->Customer_Report == 'Yes')
-                                                    <td><a href="https://{{ $server->IP }}/custom_report"
-                                                            target="_blank"><i class="fas fa-check-circle"
-                                                                style="color:green;"></i>Go</a></td>
-                                                @else
-                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
-                                                @endif
-
-                                                @if ($server->Q_Panel == 'Yes')
-                                                    <td><a href="https://{{ $server->IP }}/qpanel" target="_blank"><i
-                                                                class="fas fa-check-circle"
-                                                                style="color:green;"></i>Go</a></td>
-                                                @else
-                                                    <td><i class="fas fa-times" style="color:red;"></i></td>
-                                                @endif
-                                                <td>{{ $server->SSH_PORT }}</td>
-                                                <td>{{ $server->HTTP_PORT }}</td>
-                                                <td>{{ $server->HTTPS_PORT }}</td>
-                                                <td>{{ $server->Webmin_PORT }}</td>
-                                                <td>{{ $server->created_at }}</td>
-                                                <td>{{ $server->update_at }}</td>
-
                                             </tr>
                                         @endforeach
                                     @else
                                         <div>
-                                            <h2>No posts found</h2>
+                                            <h2>No Servers found</h2>
                                         </div>
                                     @endif
                                 </tbody>
