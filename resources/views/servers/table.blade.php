@@ -51,17 +51,17 @@
                                         <td class="sticky">Department</td>
                                         <td class="sticky">Hardware</td> --}}
                                         <td class="sticky"><strong>Server Primary IP</strong></td>
-                                        <td><strong>Run</strong></td>
+                                        
+                                        <td class="sticky"><strong>Secondary IP</strong></td>
                                         {{-- <td class="sticky"><strong>Solution Distro</strong></td>
                                         <td class="sticky"><strong>Service Contract</strong></td>
                                         <td class="sticky"><strong>Comment</strong></td>
                                         <td class="sticky"><strong>ISD Allowed</strong></td> --}}
                                         <td class="sticky"><strong>Failover IP</strong></td>
-                                        <td class="sticky"><strong>Winbox</strong></td>
-                                        <td class="sticky"><strong>Secondary IP</strong></td>
-                                        <td class="sticky"><strong>Queue Stats</strong></td>
+                                        {{-- <td class="sticky"><strong>Winbox</strong></td> --}}
+                                        {{-- <td class="sticky"><strong>Queue Stats</strong></td>
                                         <td class="sticky"><strong>Custom Report</strong></td>
-                                        <td class="sticky"><strong>Q Panel</strong></td>
+                                        <td class="sticky"><strong>Q Panel</strong></td> --}}
                                         {{-- <td class="sticky">SSH Port</td>
                                         <td class="sticky">HTTP Port</td>
                                         <td class="sticky">HTTPS Port</td>
@@ -85,7 +85,9 @@
                                                 <td>{{ $server->department->name }}</td>
                                                 <td>{{ $server->Hardware }}</td> --}}
                                                 <td>{{ $server->IP }}</td>
-                                                <td>
+                                                
+                                                <td>{{ $server->Secondary_IP }}</td>
+                                                {{-- <td>
                                                     <div class="dropdown">
                                                         <button class="btn btn-info dropdown-toggle" type="button"
                                                             id="dropdownMenuButton" data-toggle="dropdown"
@@ -107,7 +109,7 @@
                                                                 PORT</a>
                                                         </div>
                                                     </div>
-                                                </td>
+                                                </td> --}}
                                                 {{-- <td>{{ $server->Solution_Distro }}</td>
                                                 @if ($server->Service_Contract == 'Yes')
                                                     <td><i class="fas fa-check-circle" style="color:green;"></i></td>
@@ -121,9 +123,8 @@
                                                     <td><i class="fas fa-times" style="color:red;"></i></td>
                                                 @endif --}}
                                                 <td>{{ $server->Failover_IP }}</td>
-                                                <td>{{ $server->Winbox }}</td>
-                                                <td>{{ $server->Secondary_IP }}</td>
-                                                @if ($server->Queue_Stats == 'Yes')
+                                                {{-- <td>{{ $server->Winbox }}</td> --}}
+                                                {{-- @if ($server->Queue_Stats == 'Yes')
                                                     <td><a href="https://{{ $server->IP }}/queue-stats"
                                                             target="_blank"><i class="fas fa-check-circle"
                                                                 style="color:green;"></i>Go</a></td>
@@ -144,7 +145,7 @@
                                                                 style="color:green;"></i>Go</a></td>
                                                 @else
                                                     <td><i class="fas fa-times" style="color:red;"></i></td>
-                                                @endif
+                                                @endif --}}
                                                 {{-- <td>{{ $server->SSH_PORT }}</td>
                                                 <td>{{ $server->HTTP_PORT }}</td>
                                                 <td>{{ $server->HTTPS_PORT }}</td>
