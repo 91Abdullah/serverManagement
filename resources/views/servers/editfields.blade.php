@@ -61,7 +61,7 @@
 <!-- Service Contract Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('Service_Contract', 'Service Contract:') !!}
-    {!! Form::select('Service_Contract', ['0' => 'Select Option', '1' => 'Yes', '2' => 'No'], ($server->Service_Contract==="Yes") ? 1 : 2, ['class' => 'form-control']) !!}
+    {!! Form::select('Service_Contract', ['0' => 'Select Option', 'Yes' => 'Yes', 'No' => 'No'], ($server->Service_Contract==="Yes") ? 1 : 2, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Comment Field -->
@@ -73,7 +73,7 @@
 <!-- Isd Allowed Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('ISD_Allowed', 'ISD Allowed:') !!}
-    {!! Form::select('ISD_Allowed', ['0' => 'Select Option', '1' => 'Yes', '2' => 'No'], ($server->ISD_Allowed==="Yes") ? 1 : 2, ['class' => 'form-control']) !!}
+    {!! Form::select('ISD_Allowed', ['0' => 'Select Option', 'Yes' => 'Yes', 'No' => 'No'], ($server->ISD_Allowed==="Yes") ? 1 : 2, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Failover Ip Field -->
@@ -97,19 +97,19 @@
 <!-- Queue Stats Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('Queue_Stats', 'Queue Stats:') !!}
-    {!! Form::select('Queue_stats', ['0' => 'Select Option', '1' => 'Yes', '2' => 'No'], ($server->Queue_Stats==="Yes") ? 1 : 2, ['class' => 'form-control']) !!}
+    {!! Form::select('Queue_stats', ['0' => 'Select Option', 'Yes' => 'Yes', 'No' => 'No'], ($server->Queue_Stats==="Yes") ? 1 : 2, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Customer Report Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('Customer_Report', 'Custom Report:') !!}
-    {!! Form::select('Customer_Report',['0' => 'Select Option', '1' => 'Yes', '2' => 'No'], ($server->Customer_Report==="Yes") ? 1 : 2 , ['class' => 'form-control']) !!}
+    {!! Form::select('Customer_Report',['0' => 'Select Option', 'Yes' => 'Yes', 'No' => 'No'], ($server->Customer_Report==="Yes") ? 1 : 2 , ['class' => 'form-control']) !!}
 </div>
 
 <!-- Q Panel Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('Q_Panel', 'Q Panel:') !!}
-    {!! Form::select('Q_Panel', ['0' => 'Select Option', '1' => 'Yes', '2' => 'No'], ($server->Q_Panel==="Yes") ? 1 : 2 , ['class' => 'form-control']) !!}
+    {!! Form::select('Q_Panel', ['0' => 'Select Option', 'Yes' => 'Yes', 'No' => 'No'], ($server->Q_Panel==="Yes") ? 1 : 2 , ['class' => 'form-control']) !!}
 </div>
 
 <!-- Ssh Port Field -->
