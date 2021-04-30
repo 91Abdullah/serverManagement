@@ -57,7 +57,7 @@ Route::resource('blogs', BlogController::class)->middleware('auth');
 	Route::get('file-export', [ServersController::class, 'fileExport'])->name('file-export');
 Route::get('file-import-export', [ServersController::class, 'fileImportExport']);
 Route::post('file-import', [ServersController::class, 'fileImport'])->name('file-import');
-
+Route::get('truncate', [ServersController::class, 'truncate'])->name('truncate');
 
 Route::get('infyom/generator_builder', [GeneratorBuilderController::class, 'builder'])->name('io_generator_builder');
 

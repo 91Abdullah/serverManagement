@@ -248,32 +248,68 @@ class ServersController extends AppBaseController
                 else{
                     $solution_type_id = null;
                 }
+                if($data['servicecontract'] == 'Yes' || $data['servicecontract'] == 'yes'  || $data['servicecontract'] == 'y')
+                {
+                    $SMS_service_contract = 'Yes';
+                }
+                else{
+                    $SMS_service_contract = 'No';
+                }
+                if($data['isdallowed'] == 'Yes' || $data['isdallowed'] == 'yes'  || $data['isdallowed'] == 'y')
+                {
+                    $SMS_isd_allowed = 'Yes';
+                }
+                else{
+                    $SMS_isd_allowed = 'No';
+                }
+                if($data['queuestats'] == 'Yes' || $data['queuestats'] == 'yes'  || $data['queuestats'] == 'y')
+                {
+                    $SMS_queuestats = 'Yes';
+                }
+                else{
+                    $SMS_queuestats = 'No';
+                }
+                if($data['customerreport'] == 'Yes' || $data['customerreport'] == 'yes'  || $data['customerreport'] == 'y')
+                {
+                    $SMS_customerreport = 'Yes';
+                }
+                else{
+                    $SMS_customerreport = 'No';
+                }
+                if($data['qpanel'] == 'Yes' || $data['qpanel'] == 'yes'  || $data['qpanel'] == 'y')
+                {
+                    $SMS_qpanel = 'Yes';
+                }
+                else{
+                    $SMS_qpanel = 'No';
+                }
+                
+               
+
+                $server = Servers::firstOrNew([ 'Customer_Name'=>$data['customername']]);
+
+                if($server->Customer_Name == ''){
+                    return redirect()->route('servers.index')->with('error','Some Customer Names are null, please check again and import again after truncate');
+                }
+                else{
+                    $server->Customer_Name = $data['customername'];
+                }                
 
                 
-                $server = Servers::firstOrNew([ 'Customer_Name'=>$data['customername']]);
-                $server->Customer_Name = $data['customername'];
-                $server->Server_Password = $data['serverpassword'];
     
                 $server->Hardware = $data['hardware'];
-                if($server->Service_Contract == 1){
-                    $data['servicecontract'] = 1;
-                }
+                
+
+                $server->Service_Contract = $SMS_service_contract;
                 $server->Comment = $data['comment'];
-                if ($server->ISD_Allowed == 1) {
-                    $data['isdallowed'] = 1;
-                }
+                $server->ISD_Allowed = $SMS_isd_allowed;
+                    
                 $server->Failover_IP = $data['failoverip'];
                 $server->Winbox = $data['winbox'];
                 $server->Secondary_IP = $data['secondaryip'];
-                if ($server->Queue_Stats == 1) {
-                    $data['queuestats'] = 1;
-                }
-                if ($server->Customer_Report == 1) {
-                    $data['customerreport'] = 1;
-                }
-                if ($server->Q_Panel) {
-                    $data['qpanel'] = 1;
-                }
+                $server->Queue_Stats = $SMS_queuestats;
+                $server->Customer_Report =  $SMS_customerreport;
+                $server->Q_Panel = $SMS_qpanel;
                 $server->SSH_PORT = $data['sshport'];
                 $server->HTTP_PORT = $data['httpport'];
                 $server->Webmin_PORT = $data['webminport'];
@@ -298,6 +334,10 @@ class ServersController extends AppBaseController
         return redirect()->route('servers.index')->with('success','Servers imported successfully');
     }
 
+    public function truncate(){
+        Servers::truncate();
+        return redirect()->route('servers.index')->with('warning','Servers truncated successfully');
+    }
 
 
     public function fileExport()

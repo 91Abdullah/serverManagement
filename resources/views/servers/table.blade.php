@@ -15,17 +15,17 @@
         {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
 
 
-        <a href="{{ route('file-export') }}" class="btn btn-success" >Download CSV</a>
+        <a href="{{ route('file-export') }}" class="btn btn-success">Download CSV</a>
         {!! Form::close() !!}
     </div>
     <button class="btn" id="btntotoggle">Import/Export <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
-    
+
     <div class="content">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                       
+
                         @can('server-create')
                             <a class="btn btn-primary btn-round text-white pull-right"
                                 href="{{ route('servers.create') }}">Add Server</a>
@@ -35,7 +35,7 @@
                             <button class="btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </form>
                         <h4 class="card-title">Servers</h4>
-                        
+
                     </div>
                     <div class="card-body">
                         <div class="toolbar" style="overflow-x: auto;">
@@ -51,7 +51,7 @@
                                         <td class="sticky">Department</td>
                                         <td class="sticky">Hardware</td> --}}
                                         <td class="sticky"><strong>Server Primary IP</strong></td>
-                                        
+
                                         <td class="sticky"><strong>Secondary IP</strong></td>
                                         {{-- <td class="sticky"><strong>Solution Distro</strong></td>
                                         <td class="sticky"><strong>Service Contract</strong></td>
@@ -74,7 +74,7 @@
                                     @if ($servers->isNotEmpty())
                                         @foreach ($servers as $server)
                                             <tr>
-                                                
+
                                                 <td>{{ $number++ }}</td>
                                                 <td>{{ $server->city->name }}</td>
                                                 <td>{{ $server->Customer_Name }}</td>
@@ -84,9 +84,51 @@
                                                 <td>{{ $server->solutionType->name }}</td>
                                                 <td>{{ $server->department->name }}</td>
                                                 <td>{{ $server->Hardware }}</td> --}}
-                                                <td>{{ $server->IP }}</td>
-                                                
-                                                <td>{{ $server->Secondary_IP }}</td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <a href="" class="dropdown-toggle" id="" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">
+                                                            {{ $server->IP }}
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="https://{{ $server->IP . ':' . $server->SSH_PORT }}">SSH
+                                                                PORT</a>
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="http://{{ $server->IP . ':' . $server->HTTP_PORT }}">HTTP
+                                                                PORT</a>
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="https://{{ $server->IP . ':' . $server->HTTPS_PORT }}">HTTPS
+                                                                PORT</a>
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="https://{{ $server->IP . ':' . $server->Webmin_PORT }}">Webmin
+                                                                PORT</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <a href="" class="dropdown-toggle" id="" data-toggle="dropdown"
+                                                            aria-haspopup="true" aria-expanded="false">
+                                                            {{ $server->Secondary_IP }}
+                                                        </a>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="https://{{ $server->Secondary_IP . ':' . $server->SSH_PORT }}">SSH
+                                                                PORT</a>
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="http://{{ $server->Secondary_IP . ':' . $server->HTTP_PORT }}">HTTP
+                                                                PORT</a>
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="https://{{ $server->Secondary_IP . ':' . $server->HTTPS_PORT }}">HTTPS
+                                                                PORT</a>
+                                                            <a class="dropdown-item" target="_blank"
+                                                                href="https://{{ $server->Secondary_IP . ':' . $server->Webmin_PORT }}">Webmin
+                                                                PORT</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                                 {{-- <td>
                                                     <div class="dropdown">
                                                         <button class="btn btn-info dropdown-toggle" type="button"
@@ -122,7 +164,26 @@
                                                 @else
                                                     <td><i class="fas fa-times" style="color:red;"></i></td>
                                                 @endif --}}
-                                                <td>{{ $server->Failover_IP }}</td>
+                                                <td>
+                                                    <a href="" class="dropdown-toggle" id="" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        {{ $server->Failover_IP }}
+                                                    </a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" target="_blank"
+                                                            href="https://{{ $server->Failover_IP . ':' . $server->SSH_PORT }}">SSH
+                                                            PORT</a>
+                                                        <a class="dropdown-item" target="_blank"
+                                                            href="http://{{ $server->Failover_IP . ':' . $server->HTTP_PORT }}">HTTP
+                                                            PORT</a>
+                                                        <a class="dropdown-item" target="_blank"
+                                                            href="https://{{ $server->Failover_IP . ':' . $server->HTTPS_PORT }}">HTTPS
+                                                            PORT</a>
+                                                        <a class="dropdown-item" target="_blank"
+                                                            href="https://{{ $server->Failover_IP . ':' . $server->Webmin_PORT }}">Webmin
+                                                            PORT</a>
+                                                    </div>
+                                                </td>
                                                 {{-- <td>{{ $server->Winbox }}</td> --}}
                                                 {{-- @if ($server->Queue_Stats == 'Yes')
                                                     <td><a href="https://{{ $server->IP }}/queue-stats"
@@ -188,7 +249,7 @@
                                 </tbody>
                             </table>
                             {{ $servers->links() }}
-
+                            <a class="btn" href="{{ route('truncate') }}" href="">Erase All Servers</a>
                         </div>
                     </div>
                 </div>
