@@ -93,5 +93,8 @@ class User extends Authenticatable
         return $this->hasMany(Servers::class, 'update_by');
     }
     
+    public function department(){
+        return $this->belongsTo(Department::class);
+    }
     
 }

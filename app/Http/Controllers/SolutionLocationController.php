@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use Auth;
+use App\Models\SolutionLocation;
 
 class SolutionLocationController extends AppBaseController
 {
@@ -165,5 +166,11 @@ class SolutionLocationController extends AppBaseController
         Flash::success('Solution Location deleted successfully.');
 
         return redirect(route('solutionLocations.index'));
+    }
+
+    public function truncate()
+    {
+        SolutionLocation::truncate();
+        return redirect()->route('solutionLocations.index')->with('warning','Solution Locations truncated successfully');
     }
 }

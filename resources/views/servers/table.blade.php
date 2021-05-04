@@ -42,22 +42,22 @@
                             <table class="table table-striped" id="servers-table" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <td class="sticky"><strong>S.</br>no</strong></td>
-                                        <td class="sticky"><strong>City</strong></td>
-                                        <td class="sticky"><strong>Customer Name</strong></td>
+                                        <td class=""><strong>S.</br>no</strong></td>
+                                        <td class=""><strong>City</strong></td>
+                                        <td class=""><strong>Customer Name</strong></td>
                                         {{-- <td class="sticky">Server Password</td>
                                         <td class="sticky">Solution Location</td>
                                         <td class="sticky">Solution Type</td>
                                         <td class="sticky">Department</td>
                                         <td class="sticky">Hardware</td> --}}
-                                        <td class="sticky"><strong>Server Primary IP</strong></td>
+                                        <td class=""><strong>Server Primary IP</strong></td>
 
-                                        <td class="sticky"><strong>Secondary IP</strong></td>
+                                        <td class=""><strong>Secondary IP</strong></td>
                                         {{-- <td class="sticky"><strong>Solution Distro</strong></td>
                                         <td class="sticky"><strong>Service Contract</strong></td>
                                         <td class="sticky"><strong>Comment</strong></td>
                                         <td class="sticky"><strong>ISD Allowed</strong></td> --}}
-                                        <td class="sticky"><strong>Failover IP</strong></td>
+                                        <td class=""><strong>Failover IP</strong></td>
                                         {{-- <td class="sticky"><strong>Winbox</strong></td> --}}
                                         {{-- <td class="sticky"><strong>Queue Stats</strong></td>
                                         <td class="sticky"><strong>Custom Report</strong></td>
@@ -66,8 +66,8 @@
                                         <td class="sticky">HTTP Port</td>
                                         <td class="sticky">HTTPS Port</td>
                                         <td class="sticky">Webmin Port</td> --}}
-                                        <td class="sticky"><strong>Created Date</strong></td>
-                                        <td class="sticky"><strong>Actions</strong></td>
+                                        <td class=""><strong>Created Date</strong></td>
+                                        <td class=""><strong>Actions</strong></td>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -249,10 +249,12 @@
                                 </tbody>
                             </table>
                             {{ $servers->links() }}
-                            <a class="btn" href="{{ route('truncate') }}" href="">Erase All Servers</a>
+                            
                         </div>
                     </div>
                 </div>
+                <a class="btn" onclick="return confirm('Are you sure to truncate All data?')" href="{{ route('truncate') }}" href="">Erase All Servers</a>
+
             </div>
         </div>
     </div>

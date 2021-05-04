@@ -61,4 +61,8 @@ class Department extends Model
     {
         return $this->hasMany(Servers::class);
     }
+
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }

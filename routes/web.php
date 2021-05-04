@@ -58,6 +58,9 @@ Route::resource('blogs', BlogController::class)->middleware('auth');
 Route::get('file-import-export', [ServersController::class, 'fileImportExport']);
 Route::post('file-import', [ServersController::class, 'fileImport'])->name('file-import');
 Route::get('truncate', [ServersController::class, 'truncate'])->name('truncate');
+Route::get('cities.truncate', [CityController::class, 'truncate'])->name('cities.truncate');
+Route::get('solutionlocation.truncate', [SolutionLocationController::class, 'truncate'])->name('solutionlocation.truncate');
+Route::get('solutionTypes.truncate', [SolutionTypeController::class, 'truncate'])->name('solutionTypes.truncate');
 
 Route::get('infyom/generator_builder', [GeneratorBuilderController::class, 'builder'])->name('io_generator_builder');
 

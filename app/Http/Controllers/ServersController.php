@@ -218,7 +218,7 @@ class ServersController extends AppBaseController
                 // dd($data);
                 
                 if($data['city'] != 'N/A' && $data['city'] != ''){
-                    $SMS_city_data = City::firstOrCreate(['name' => $data['city']]);
+                    $SMS_city_data = City::firstOrCreate(['name' => str_replace(' ', '', $data['city'])]);
                     $city_id = $SMS_city_data->id;
                 }
                 else{
@@ -226,7 +226,7 @@ class ServersController extends AppBaseController
                 }
                 
                 if($data['department'] != 'N/A' && $data['department'] != ''){
-                    $SMS_department_data = Department::firstOrCreate(['name' => $data['department']]);
+                    $SMS_department_data = Department::firstOrCreate(['name' => str_replace(' ', '', $data['department'])]);
                     $department_id = $SMS_department_data->id;
                 }
                 else{
@@ -234,7 +234,7 @@ class ServersController extends AppBaseController
                 }
 
                 if($data['solutionlocation'] != 'N/A' && $data['solutionlocation'] != ''){
-                    $SMS_solution_location_data = SolutionLocation::firstOrCreate(['name' => $data['solutionlocation']]);
+                    $SMS_solution_location_data = SolutionLocation::firstOrCreate(['name' => str_replace(array(' ', ':', '/'), '', $data['solutionlocation'])]);
                     $solution_location_id = $SMS_solution_location_data->id;
                 }
                 else{
@@ -242,46 +242,61 @@ class ServersController extends AppBaseController
                 }
                 
                 if($data['solutiontype'] != 'N/A' && $data['solutiontype'] != ''){
-                    $SMS_solution_type_data = SolutionType::firstOrCreate(['name' =>  $data['solutiontype']]);
+                    $SMS_solution_type_data = SolutionType::firstOrCreate(['name' =>  str_replace(' ', '', $data['solutiontype'])]);
                     $solution_type_id = $SMS_solution_type_data->id;
                 }
                 else{
                     $solution_type_id = null;
                 }
-                if($data['servicecontract'] == 'Yes' || $data['servicecontract'] == 'yes'  || $data['servicecontract'] == 'y')
+                if($data['servicecontract'] == 'Yes' || $data['servicecontract'] == 'yes'  || $data['servicecontract'] == 'y' || $data['servicecontract'] == 'Y')
                 {
                     $SMS_service_contract = 'Yes';
                 }
-                else{
+                elseif($data['servicecontract'] == 'No' || $data['servicecontract'] == 'no'  || $data['servicecontract'] == 'n' || $data['servicecontract'] == 'N'){
                     $SMS_service_contract = 'No';
                 }
-                if($data['isdallowed'] == 'Yes' || $data['isdallowed'] == 'yes'  || $data['isdallowed'] == 'y')
+                else{
+                    $SMS_service_contract = null;
+                }
+                if($data['isdallowed'] == 'Yes' || $data['isdallowed'] == 'yes'  || $data['isdallowed'] == 'y'  || $data['isdallowed'] == 'Y')
                 {
                     $SMS_isd_allowed = 'Yes';
                 }
-                else{
+                elseif($data['isdallowed'] == 'No' || $data['isdallowed'] == 'no'  || $data['isdallowed'] == 'n'  || $data['isdallowed'] == 'N'){
                     $SMS_isd_allowed = 'No';
                 }
-                if($data['queuestats'] == 'Yes' || $data['queuestats'] == 'yes'  || $data['queuestats'] == 'y')
+                else{
+                    $SMS_isd_allowed = null;
+                }
+                if($data['queuestats'] == 'Yes' || $data['queuestats'] == 'yes'  || $data['queuestats'] == 'y' || $data['queuestats'] == 'Y')
                 {
                     $SMS_queuestats = 'Yes';
                 }
-                else{
+                elseif($data['queuestats'] == 'No' || $data['queuestats'] == 'no'  || $data['queuestats'] == 'n' || $data['queuestats'] == 'N'){
                     $SMS_queuestats = 'No';
                 }
-                if($data['customerreport'] == 'Yes' || $data['customerreport'] == 'yes'  || $data['customerreport'] == 'y')
+                else{
+                    $SMS_queuestats = null;
+                }
+                if($data['customerreport'] == 'Yes' || $data['customerreport'] == 'yes'  || $data['customerreport'] == 'y'  || $data['customerreport'] == 'Y')
                 {
                     $SMS_customerreport = 'Yes';
                 }
-                else{
+                elseif($data['customerreport'] == 'No' || $data['customerreport'] == 'no'  || $data['customerreport'] == 'n'  || $data['customerreport'] == 'N'){
                     $SMS_customerreport = 'No';
                 }
-                if($data['qpanel'] == 'Yes' || $data['qpanel'] == 'yes'  || $data['qpanel'] == 'y')
+                else{
+                    $SMS_customerreport = null;
+                }
+                if($data['qpanel'] == 'Yes' || $data['qpanel'] == 'yes'  || $data['qpanel'] == 'y' || $data['qpanel'] == 'Y')
                 {
                     $SMS_qpanel = 'Yes';
                 }
-                else{
+                elseif($data['qpanel'] == 'No' || $data['qpanel'] == 'no'  || $data['qpanel'] == 'n' || $data['qpanel'] == 'N'){
                     $SMS_qpanel = 'No';
+                }
+                else{
+                    $SMS_qpanel = null;
                 }
                 
                

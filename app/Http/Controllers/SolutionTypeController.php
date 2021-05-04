@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use Auth;
+use App\Models\SolutionType;
 
 class SolutionTypeController extends AppBaseController
 {
@@ -161,5 +162,10 @@ class SolutionTypeController extends AppBaseController
         Flash::success('Solution Type deleted successfully.');
 
         return redirect(route('solutionTypes.index'));
+    }
+    public function truncate()
+    {
+        SolutionType::truncate();
+        return redirect()->route('solutionTypes.index')->with('warning','Solution Types truncated successfully');
     }
 }

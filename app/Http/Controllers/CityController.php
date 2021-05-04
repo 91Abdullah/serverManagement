@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Response;
 use Auth;
+use App\Models\City;
 
 class CityController extends AppBaseController
 {
@@ -163,5 +164,9 @@ class CityController extends AppBaseController
         Flash::success('City deleted successfully.');
 
         return redirect(route('cities.index'));
+    }
+    public function truncate(){
+        City::truncate();
+        return redirect()->route('cities.index')->with('warning','Cities truncated successfully');
     }
 }
