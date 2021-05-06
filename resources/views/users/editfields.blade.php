@@ -10,6 +10,11 @@
     {!! Form::email('email', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
+<div class="form-group col-sm-6">
+    {!! Form::label('department_id', 'Department:') !!}
+    {!! Form::select('department_id', $department, null, ['class' => 'form-control']) !!}
+</div>
+
 <!-- Email Verified At Field -->
 
 

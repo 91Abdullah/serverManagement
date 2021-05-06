@@ -10,6 +10,11 @@
     <p>{{ $user->email }}</p>
 </div>
 
+<div class="form-group">
+    {!! Form::label('department_id', 'Department Type Id:') !!}
+    <p>{{ $servers->department->name }}</p>
+</div>
+
 <!-- Email Verified At Field -->
 <div class="form-group">
     {!! Form::label('email_verified_at', 'Email Verified At:') !!}

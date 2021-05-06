@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Repositories\UserRepository;
+use App\Models\Department;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
@@ -38,8 +39,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        $department=Department::pluck('name', 'id');
         $roles = Role::pluck('name','name')->all();
-        return view('users.create',compact('roles'));
+        return view('users.create',compact('roles', 'department'));
     }
     
     /**
@@ -75,8 +77,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $department=Department::pluck('name', 'id');
         $user = User::find($id);
-        return view('users.show',compact('user'));
+        return view('users.show',compact('user', 'department'));
     }
     
     /**
@@ -87,11 +90,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $department=Department::pluck('name', 'id');
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
     
-        return view('users.edit',compact('user','roles','userRole'));
+        return view('users.edit',compact('user','roles','userRole', 'department'));
     }
     
     /**

@@ -58,10 +58,12 @@ class ServersController extends AppBaseController
      */
     public function index(Request $request)
     {
+        $department = Auth::User()->department_id;
+        // dd($department);
         $somedropdowns = $this->somedropdowns;
         $number = 0;
 
-        $servers = Servers::paginate(6);
+        $servers = Servers::where('department_id', '=', $department)->paginate(6);
 
         return view('servers.index', compact('servers', 'number', 'somedropdowns'));
     }
