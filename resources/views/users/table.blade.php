@@ -5,7 +5,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
-                <td>Department</td>
+                <td></td>
 
                 <th colspan="3">Action</th>
             </tr>
@@ -22,7 +22,7 @@
                             @endforeach
                         @endif
                     </td>
-                    <td>{{$user->department->name}}</td>
+                    <td></td>
                     <td>
                         {!! Form::open(['route' => ['users.destroy', $user->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>

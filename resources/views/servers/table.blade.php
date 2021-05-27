@@ -47,8 +47,9 @@
                                         <td class=""><strong>Customer Name</strong></td>
                                         {{-- <td class="sticky">Server Password</td>
                                         <td class="sticky">Solution Location</td>
-                                        <td class="sticky">Solution Type</td>
-                                        <td class="sticky">Department</td>
+                                        <td class="sticky">Solution Type</td>--}}
+                                        <td class=""><strong>Department</strong></td>
+                                        {{-- 
                                         <td class="sticky">Hardware</td> --}}
                                         <td class=""><strong>Server Primary IP</strong></td>
 
@@ -81,8 +82,10 @@
                                                 {{-- <td>***********</td>
                                                
                                                 <td>{{ $server->solutionLocation->name }}</td>
-                                                <td>{{ $server->solutionType->name }}</td>
+                                                <td>{{ $server->solutionType->name }}</td>--}}
+
                                                 <td>{{ $server->department->name }}</td>
+                                                {{--
                                                 <td>{{ $server->Hardware }}</td> --}}
                                                 <td>
                                                     <div class="dropdown">

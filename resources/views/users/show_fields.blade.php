@@ -10,16 +10,18 @@
     <p>{{ $user->email }}</p>
 </div>
 
-<div class="form-group">
-    {!! Form::label('department_id', 'Department Type Id:') !!}
-    <p>{{ $servers->department->name }}</p>
+<div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="form-group">
+        <strong>Departments:</strong>
+        @if(!empty($userDepartments))
+            @foreach($userDepartments as $v)
+                <label class="label label-success">{{ $v->name }},</label>
+            @endforeach
+        @endif
+    </div>
 </div>
 
-<!-- Email Verified At Field -->
-<div class="form-group">
-    {!! Form::label('email_verified_at', 'Email Verified At:') !!}
-    <p>{{ $user->email_verified_at }}</p>
-</div>
+
 
 <!-- Password Field -->
 <div class="col-xs-12 col-sm-12 col-md-12">

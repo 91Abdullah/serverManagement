@@ -9,10 +9,9 @@
     {!! Form::label('email', 'Email:') !!}
     {!! Form::email('email', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
-<div class="form-group col-sm-6">
-    {!! Form::label('department_id', 'Department:') !!}
-    {!! Form::select('department_id', $department, '', ['class' => 'form-control']) !!}
-</div>
+
+
+
 
 <!-- Email Verified At Field -->
 
@@ -46,6 +45,23 @@
     <div class="form-group">
         <strong>Role:</strong>
         {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="card card-chart" >
+        <div class="card-header">
+            <h4 class="card-title">Department</h4>
+        </div>
+        <div class="card-body">
+            {{-- {{dd($department[0])}} --}}
+            @foreach ($department[0] as $depart)
+                <label>{{ Form::checkbox('department[]', $depart->id, false, ['class' => 'name']) }}
+                    {{ $depart->name }}</label>
+                <br />
+            @endforeach
+        </div>
+        <div class="card-footer">--</div>
     </div>
 </div>
 

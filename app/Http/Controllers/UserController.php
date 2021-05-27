@@ -13,6 +13,7 @@ use Response;
 use Auth;
 use Complex\Complex;
 use App\Models\User;
+use App\Models\UserHasDepartment;
 use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
@@ -25,8 +26,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $department =[];
+
+    function __construct()
+    {
+
+        $this->department = [
+            Department::all()
+        ];
+    }
     public function index(Request $request)
     {
+        $department = $this->department;
+
         $data = User::orderBy('id','DESC')->paginate(5);
         return view('users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -39,7 +51,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $department=Department::pluck('name', 'id');
+        $department = $this->department;
+        
         $roles = Role::pluck('name','name')->all();
         return view('users.create',compact('roles', 'department'));
     }
@@ -63,6 +76,23 @@ class UserController extends Controller
         $input['password'] = Hash::make($input['password']);
     
         $user = User::create($input);
+        
+
+        $department = $request->input('department');
+        $arr=$department;
+
+        $user->departments()->sync($arr);
+
+
+        //  foreach ($department as $dept) {
+        //      # code...
+        //      $data = ['department_id' => $dept, 'user_id' => $user->id];
+        //     //  dd($data);
+        //      UserHasDepartment::insert($data);
+        //  }
+
+
+        // $user->department($request->input('department'));
         $user->assignRole($request->input('roles'));
     
         return redirect()->route('users.index')
@@ -77,9 +107,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $department=Department::pluck('name', 'id');
+        $userDepartments = Department::join('user_has_departments', 'user_has_departments.department_id', "=", "department.id")->where('user_has_departments.user_id', $id)->get();
+        
         $user = User::find($id);
-        return view('users.show',compact('user', 'department'));
+        return view('users.show',compact('user', 'userDepartments'));
     }
     
     /**
@@ -90,12 +121,16 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $department=Department::pluck('name', 'id');
+        $department = $this->department;
         $user = User::find($id);
+
+        $userDepartments = DB::table('user_has_departments')->where('user_has_departments.user_id', $id)->pluck('user_has_departments.department_id', 'user_has_departments.department_id')->all();
+
+
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
     
-        return view('users.edit',compact('user','roles','userRole', 'department'));
+        return view('users.edit',compact('user','roles','userRole', 'department', 'userDepartments'));
     }
     
     /**
@@ -121,8 +156,26 @@ class UserController extends Controller
             $input = Arr::except($input,array('password'));    
         }
     
+        $department = $request->input('department');
+        $arr=$department;
+
+        
+
         $user = User::find($id);
+        
+
+        // $data = [];
+        //  foreach ($department as $dept) {
+        //      # code...
+        //      $data = ['department_id' => $dept, 'user_id' => $user->id];
+        //     //  dd($data);
+        //      UserHasDepartment::insert($data);
+        //  }
+        //  dd($data);
+
         $user->update($input);
+
+        $user->departments()->sync($arr);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
     
         $user->assignRole($request->input('roles'));

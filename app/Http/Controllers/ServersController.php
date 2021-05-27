@@ -19,6 +19,7 @@ use Session;
 use DB;
 use App\Models\City;
 use App\Models\Department;
+use App\Models\UserHasDepartment;
 use App\Models\SolutionLocation;
 use App\Models\SolutionType;
 use Illuminate\Support\Facades\Input;
@@ -58,12 +59,27 @@ class ServersController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $department = Auth::User()->department_id;
+
+        
+        $user = Auth::User()->id;
+        $department = [];
+        $department = UserHasDepartment::where('user_id', '=' , $user)->get('department_id');
+
+        // dd($department);
+
+        // $userhasdepartments = UserHasDepartment::get(['user_id', 'department_id'])->groupBy('user_id');
+
+        // $userhasdepartment = $userhasdepartments->map(function($item){
+        //     return $item->pluck('department_id');
+        // });
+
         // dd($department);
         $somedropdowns = $this->somedropdowns;
         $number = 0;
 
-        $servers = Servers::where('department_id', '=', $department)->paginate(6);
+        // $servers = Servers::whereIn('department_id', $department)->paginate(6);
+        $servers = Servers::whereIn('department_id', $department)->paginate(6);
+
 
         return view('servers.index', compact('servers', 'number', 'somedropdowns'));
     }

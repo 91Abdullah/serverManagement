@@ -93,8 +93,12 @@ class User extends Authenticatable
         return $this->hasMany(Servers::class, 'update_by');
     }
     
-    public function department(){
-        return $this->belongsTo(Department::class);
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class, 'user_has_departments', 'user_id', 'department_id')->withTimestamps();
     }
+
+
+    
     
 }

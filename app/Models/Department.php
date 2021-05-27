@@ -62,7 +62,9 @@ class Department extends Model
         return $this->hasMany(Servers::class);
     }
 
-    public function user(){
-        return $this->hasMany(User::class);
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_has_departments', 'department_id', 'user_id')->withTimestamps();
     }
+    
 }
