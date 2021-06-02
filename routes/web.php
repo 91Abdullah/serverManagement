@@ -16,6 +16,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ActivityLoggerController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,9 +93,12 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
+Route::prefix('posts')->group(function(){
+	Route::get('apiwithoutkey', [PostController::class, 'apiWithoutKey'])->name('apiWithoutKey');
+	Route::get('apiwithkey', [PostController::class, 'apiWithKey'])->name('apiWithKey');
+});
 
-
-
+Route::resource('posts', PostController::class);
 
 
 

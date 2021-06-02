@@ -11,6 +11,8 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\Models\Activity;
+use Laravel\Passport\HasApiTokens;
+
 
 
 
@@ -28,6 +30,8 @@ use Spatie\Activitylog\Models\Activity;
 class User extends Authenticatable
 {
     use SoftDeletes;
+
+    use HasApiTokens;
 
     use HasFactory;
 
@@ -96,6 +100,11 @@ class User extends Authenticatable
     public function departments()
     {
         return $this->belongsToMany(Department::class, 'user_has_departments', 'user_id', 'department_id')->withTimestamps();
+    }
+
+
+    public function posts(){
+        return $this->hasMany(Post::class);
     }
 
 

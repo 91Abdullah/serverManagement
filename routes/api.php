@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PassportAuthController;
+
+
+
 
 
 /*
@@ -15,10 +19,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::post('login', [PassportAuthController::class, 'login']);
+Route::post('register', [PassportAuthController::class, 'register']);
+
+// Auth::routes();
+
+
+
+Route::middleware('auth:api')->group(function(){
+    Route::resource('posts', PostController::class);
+    Route::resource('servers', ServersController::class);
+    Route::resource('servers2', ServersAPIController::class);
 });
-
-
-Auth::routes();
-
+// Route::apiResource('servers', ServersController::class)->middleware('auth:api');

@@ -181,6 +181,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
 
+        Laravel\Passport\PassportServiceProvider::class,
 
 
     ],

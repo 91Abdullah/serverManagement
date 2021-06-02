@@ -26,4 +26,4 @@
         </tbody>
     </table>
 </div>
-<a class="btn" onclick="return confirm('Are you sure to truncate All data?')" href="{{ route('solutionTypes.truncate') }}" href="">Erase All Solution Types</a>
+{{-- <a class="btn" onclick="return confirm('Are you sure to truncate All data?')" href="{{ route('solutionTypes.truncate') }}" href="">Erase All Solution Types</a> --}}

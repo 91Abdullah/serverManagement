@@ -256,7 +256,9 @@
                         </div>
                     </div>
                 </div>
+                @can('servers-all-delete')
                 <a class="btn" onclick="return confirm('Are you sure to truncate All data?')" href="{{ route('truncate') }}" href="">Erase All Servers</a>
+                @endcan
 
             </div>
         </div>

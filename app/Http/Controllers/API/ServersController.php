@@ -8,12 +8,20 @@ use App\Http\Resources\ServersResource;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
+
 class ServersController extends Controller
 {
     public function index()
     {
+        // $servers = Servers::all();
+        // return response(['servers'=>ServersResource::collection($servers), 'message'=>'Retrieved Successfully'], 200);
+
         $servers = Servers::all();
-        return response(['servers'=>ServersResource::collection($servers), 'message'=>'Retrieved Successfully'], 200);
+
+        return response()->json([
+            'success' => true,
+            'data' => $servers
+        ]);
     }
 
     public function store(Request $request)
